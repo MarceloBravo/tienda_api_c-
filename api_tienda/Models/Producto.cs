@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -63,8 +62,15 @@ namespace api_tienda.Models
         public ICollection<ImagenesProducto> Imagenes { set; get; }
 
         public DateTime created_at { set;  get; }
-        public DateTime Updated_at { set => Updated_at = DateTime.Today; get => Updated_at; }
+        public DateTime Updated_at { set; get; }
         public DateTime Deleted_at { set; get; }
+
+
+        public Producto()
+        {
+            Updated_at = DateTime.Today;
+        }
+        
     }
     /*
     class ProductoDbContext: DbContext

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api_tienda.Models
@@ -20,10 +19,11 @@ namespace api_tienda.Models
         [StringLength(500, MinimumLength = 10, ErrorMessage = "La descripción de la categoría debe tener entre 10 y 500 carácteres.")]
         public string Descripcion { set; get; }
         public DateTime created_at { set;  get; }
-        public DateTime Updated_at { set => Updated_at = DateTime.Today; get => Updated_at; }
-        public DateTime Deleted_at { set; get; }
+        public DateTime Updated_at { set; get; }
+        public DateTime? Deleted_at { set; get; }
 
         public ICollection<Producto> Productos { set; get; }
+
     }
     /*
     class CategoriasDbContext: DbContext
