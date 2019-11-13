@@ -63,7 +63,7 @@ namespace api_tienda.Models
 
         public DateTime created_at { set;  get; }
         public DateTime Updated_at { set; get; }
-        public DateTime Deleted_at { set; get; }
+        public DateTime? Deleted_at { set; get; }
 
 
         public Producto()

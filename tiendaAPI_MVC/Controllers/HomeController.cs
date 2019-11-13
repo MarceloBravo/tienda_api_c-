@@ -12,15 +12,18 @@ namespace tiendaAPI_MVC.Controllers
 {
     public class HomeController : Controller
     {
-        const string endPoint = "http://localhost:1612/api/Categorias";
+        const string endPoint = "http://localhost:1612/api/";
 
         public async Task<ActionResult> Index()
         {
             HttpClient hc = new HttpClient();
-            var json = await hc.GetStringAsync(endPoint);
-            List<Categoria> categoriasList = JsonConvert.DeserializeObject<List<Categoria>>(json);
+            //var jsonCategorias = await hc.GetStringAsync(endPoint+ "categorias");
+            //List<Categoria> categoriasList = JsonConvert.DeserializeObject<List<Categoria>>(json);
+            var json = await hc.GetStringAsync(endPoint+ "productos");
+            List<Categoria> productosList = JsonConvert.DeserializeObject<List<Categoria>>(json);
 
-            return View(categoriasList);
+
+            return View(productosList);
         }
 
         public ActionResult About()
