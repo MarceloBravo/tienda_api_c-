@@ -9,8 +9,9 @@ namespace api_tienda.Models
 {
     public class Categoria
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { set; get; }
+        public long CategoriaId { set; get; }
         [Required(ErrorMessage = "Debes ingresar un nombre para la categoría.")]
         [StringLength(100, MinimumLength = 5, ErrorMessage = "El nombre de la categoria debe tener entre 5 y 100 carácteres.")]
         public string Nombre { set; get; }       
@@ -22,7 +23,12 @@ namespace api_tienda.Models
         public DateTime Updated_at { set; get; }
         public DateTime? Deleted_at { set; get; }
 
-        public ICollection<Producto> Productos { set; get; }
+        public virtual ICollection<Producto> Productos { set; get; }
+                
+        public Categoria()
+        {
+            this.Productos = new HashSet<Producto>();
+        }
 
     }
     /*

@@ -15,8 +15,9 @@ namespace api_tienda.Models
         private bool Nuevo = true;
         private bool Oferta = false;
 
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { set; get; }
+        public int ProductoId { set; get; }
 
         [Required(ErrorMessage = "El nombre del producto es obligatorio.")]
         [StringLength(150, MinimumLength = 10, ErrorMessage = "El nombre del producto debe tener entre 10 y 150 carácteres.")]
@@ -35,31 +36,36 @@ namespace api_tienda.Models
         [Required(ErrorMessage = "El precio del producto es obligatorio.")]
         [Range(0.0, Double.MaxValue, ErrorMessage = "El precio no puede ser un valor negativo..")]
         public decimal Precio { set; get; }
-        
+
         [Range(0.0, Double.MaxValue, ErrorMessage = "El precio anterior no puede ser un valor negativo.")]
         public decimal precioAnterior { set => PrecioAnterior = value; get => PrecioAnterior; }
 
         [Required(ErrorMessage = "Debe especificar si el producto estárá visible en la página de inicio o no.")]
-        [Range(typeof(bool), "true", "false", ErrorMessage = "Debe especificar si el producto estárá visible en la página de inicio o no.")]
+        [Range(typeof(bool), "false", "true", ErrorMessage = "Debe especificar si el producto estárá visible en la página de inicio o no.")]
         public bool visible { set => Visible = value; get => Visible; }
 
-        [Required(ErrorMessage = "Debe ingresar un color para el producto.")]        
+        [Required(ErrorMessage = "Debe ingresar un color para el producto.")]
         public string color { set => Color = value; get => Color; }
 
         [Required(ErrorMessage = "Debe especificar si el producto es nuevo o no.")]
-        [Range(typeof(bool), "true", "false", ErrorMessage = "Debe especificar si el producto es nuevo o no.")]
+        [Range(typeof(bool), "false", "true", ErrorMessage = "Debe especificar si el producto es nuevo o no.")]
         public bool nuevo { set => Nuevo = value; get => Nuevo; }
 
         [Required(ErrorMessage = "Debe especificar si el producto está en oferta o no.")]
-        [Range(typeof(bool), "true", "false", ErrorMessage = "Debe especificar si el producto está en oferta o no.")]
+        [Range(typeof(bool), "false", "true", ErrorMessage = "Debe especificar si el producto está en oferta o no.")]
         public bool oferta { set => Oferta = value; get => Oferta; }
+        
+        public long CategoriaId { set; get; }        
+        public virtual Categoria Categoria { set; get; }
 
-        public int IdCategoria { set; get; }
-        public Categoria Categoria { set; get; }
-
-        public int IdMarca { set; get; }
+        
+        public int MarcaId { set; get; }        
         public Marca Marca { set; get; }
+        
         public ICollection<ImagenesProducto> Imagenes { set; get; }
+        
+        public int TallaId { set; get; }        
+        public ICollection<Talla> Tallas {set; get;}        
 
         public DateTime created_at { set;  get; }
         public DateTime Updated_at { set; get; }
@@ -69,6 +75,7 @@ namespace api_tienda.Models
         public Producto()
         {
             Updated_at = DateTime.Today;
+            //this.Imagenes = new HashSet<ImagenesProducto>();
         }
         
     }

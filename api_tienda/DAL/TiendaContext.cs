@@ -16,6 +16,7 @@ namespace api_tienda.DAL
 
         public DbSet<Categoria> Categorias { set; get; }
         public DbSet<Marca> Marcas { set; get; }
+        public DbSet<Talla> Tallas { set; get; }
         public DbSet<Producto> Productos { set; get; }
         public DbSet<ImagenesProducto> ImagenesProductos { set; get; }
         public DbSet<Pais> Paises { set; get; }

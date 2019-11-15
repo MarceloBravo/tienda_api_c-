@@ -23,6 +23,15 @@ namespace api_tienda.Controllers
             return db.Productos;
         }
 
+        [Route("api/productosHome")]
+        [HttpGet]
+        public IQueryable<Producto> GetProductosHome()
+        {
+            List<Producto> lstProductos = new List<Producto>();
+            lstProductos = db.Productos.Where(s => s.visible == true).Select(s => s).ToList();
+            return lstProductos.AsQueryable();
+        }
+
         // GET: api/Productoes/5
         [ResponseType(typeof(Producto))]
         public IHttpActionResult GetProducto(int id)
@@ -45,7 +54,7 @@ namespace api_tienda.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != producto.id)
+            if (id != producto.ProductoId)
             {
                 return BadRequest();
             }
@@ -83,7 +92,7 @@ namespace api_tienda.Controllers
             db.Productos.Add(producto);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = producto.id }, producto);
+            return CreatedAtRoute("DefaultApi", new { id = producto.ProductoId }, producto);
         }
 
         // DELETE: api/Productoes/5
@@ -113,7 +122,7 @@ namespace api_tienda.Controllers
 
         private bool ProductoExists(int id)
         {
-            return db.Productos.Count(e => e.id == id) > 0;
+            return db.Productos.Count(e => e.ProductoId == id) > 0;
         }
     }
 }

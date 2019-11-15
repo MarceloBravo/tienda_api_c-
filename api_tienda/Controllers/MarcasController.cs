@@ -13,44 +13,44 @@ using api_tienda.Models;
 
 namespace api_tienda.Controllers
 {
-    public class CategoriasController : ApiController
+    public class MarcasController : ApiController
     {
         private TiendaContext db = new TiendaContext();
 
-        // GET: api/Categorias
-        public IQueryable<Categoria> GetCategorias()
+        // GET: api/Marcas
+        public IQueryable<Marca> GetMarcas()
         {
-            return db.Categorias;
+            return db.Marcas;
         }
 
-        // GET: api/Categorias/5
-        [ResponseType(typeof(Categoria))]
-        public IHttpActionResult GetCategoria(long id)
+        // GET: api/Marcas/5
+        [ResponseType(typeof(Marca))]
+        public IHttpActionResult GetMarca(int id)
         {
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Marca marca = db.Marcas.Find(id);
+            if (marca == null)
             {
                 return NotFound();
             }
 
-            return Ok(categoria);
+            return Ok(marca);
         }
 
-        // PUT: api/Categorias/5
+        // PUT: api/Marcas/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCategoria(long id, Categoria categoria)
+        public IHttpActionResult PutMarca(int id, Marca marca)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != categoria.CategoriaId)
+            if (id != marca.MarcaId)
             {
                 return BadRequest();
             }
 
-            db.Entry(categoria).State = EntityState.Modified;
+            db.Entry(marca).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace api_tienda.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoriaExists(id))
+                if (!MarcaExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace api_tienda.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Categorias
-        [ResponseType(typeof(Categoria))]
-        public IHttpActionResult PostCategoria(Categoria categoria)
+        // POST: api/Marcas
+        [ResponseType(typeof(Marca))]
+        public IHttpActionResult PostMarca(Marca marca)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Categorias.Add(categoria);
+            db.Marcas.Add(marca);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = categoria.CategoriaId }, categoria);
+            return CreatedAtRoute("DefaultApi", new { id = marca.MarcaId }, marca);
         }
 
-        // DELETE: api/Categorias/5
-        [ResponseType(typeof(Categoria))]
-        public IHttpActionResult DeleteCategoria(long id)
+        // DELETE: api/Marcas/5
+        [ResponseType(typeof(Marca))]
+        public IHttpActionResult DeleteMarca(int id)
         {
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Marca marca = db.Marcas.Find(id);
+            if (marca == null)
             {
                 return NotFound();
             }
 
-            db.Categorias.Remove(categoria);
+            db.Marcas.Remove(marca);
             db.SaveChanges();
 
-            return Ok(categoria);
+            return Ok(marca);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace api_tienda.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CategoriaExists(long id)
+        private bool MarcaExists(int id)
         {
-            return db.Categorias.Count(e => e.CategoriaId == id) > 0;
+            return db.Marcas.Count(e => e.MarcaId == id) > 0;
         }
     }
 }
