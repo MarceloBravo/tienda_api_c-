@@ -45,7 +45,7 @@ namespace api_tienda.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != categoria.CategoriaId)
+            if (id != categoria.Id)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace api_tienda.Controllers
             db.Categorias.Add(categoria);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = categoria.CategoriaId }, categoria);
+            return CreatedAtRoute("DefaultApi", new { id = categoria.Id }, categoria);
         }
 
         // DELETE: api/Categorias/5
@@ -113,7 +113,7 @@ namespace api_tienda.Controllers
 
         private bool CategoriaExists(long id)
         {
-            return db.Categorias.Count(e => e.CategoriaId == id) > 0;
+            return db.Categorias.Count(e => e.Id == id) > 0;
         }
     }
 }

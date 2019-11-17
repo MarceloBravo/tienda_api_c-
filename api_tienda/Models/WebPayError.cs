@@ -10,7 +10,7 @@ namespace api_tienda.Models
     public class WebPayError
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { set; get; }
+        public long Id { set; get; }
         
         [Required(ErrorMessage = "El N° de orden es obligatorio.")]
         public long IdOrden { set; get; }

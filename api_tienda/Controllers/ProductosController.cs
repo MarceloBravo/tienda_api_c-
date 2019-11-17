@@ -28,8 +28,9 @@ namespace api_tienda.Controllers
         public IQueryable<Producto> GetProductosHome()
         {
             List<Producto> lstProductos = new List<Producto>();
-            lstProductos = db.Productos.Where(s => s.visible == true).Select(s => s).ToList();
-            return lstProductos.AsQueryable();
+            lstProductos = db.Productos.Where(s => s.visible == true).Include(p => p.Categoria).Include(p => p.Marca).Include(p => p.Imagenes).ToList();            
+            var prod = lstProductos.AsQueryable();
+            return prod;
         }
 
         // GET: api/Productoes/5
@@ -54,7 +55,7 @@ namespace api_tienda.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != producto.ProductoId)
+            if (id != producto.Id)
             {
                 return BadRequest();
             }
@@ -92,7 +93,7 @@ namespace api_tienda.Controllers
             db.Productos.Add(producto);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = producto.ProductoId }, producto);
+            return CreatedAtRoute("DefaultApi", new { id = producto.Id }, producto);
         }
 
         // DELETE: api/Productoes/5
@@ -122,7 +123,7 @@ namespace api_tienda.Controllers
 
         private bool ProductoExists(int id)
         {
-            return db.Productos.Count(e => e.ProductoId == id) > 0;
+            return db.Productos.Count(e => e.Id == id) > 0;
         }
     }
 }

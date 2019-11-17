@@ -14,22 +14,21 @@ namespace api_tienda.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { set; get; }
+        public long Id { set; get; }
         [Required(ErrorMessage = "Debe especificar la ubicación de la imágen del producto.")]        
         public string Ubicacion { set; get; }
         public bool predeterminada {set => Predeterminada = value; get => Predeterminada;}
         
         public DateTime Created_at { set; get; }
-        public DateTime Updated_at { set => Updated_at = DateTime.Today; get => Updated_at; }
+        public DateTime Updated_at { set; get; }
         public DateTime? Deleted_at { set; get; }
 
         [Required(ErrorMessage = "El nombre del archivo es obligatorio")]
         public string nombreArchivo { set; get; }
 
-        [ForeignKey("Producto")]
-        public int IdProducto { set; get; }
-        [ForeignKey("IdProducto")]
-        public Producto Producto { set; get; }
+        //[ForeignKey("Producto")]
+        public long ProductoId { set; get; }        
+        //public virtual Producto Producto { set; get; }
 
     }
     /*

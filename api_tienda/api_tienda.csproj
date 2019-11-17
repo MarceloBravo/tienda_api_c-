@@ -141,6 +141,7 @@
     <Compile Include="Models\Region.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Talla.cs" />
+    <Compile Include="Models\TallasProducto.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\WebPayError.cs" />
     <Compile Include="Models\WebPayTransaction.cs" />

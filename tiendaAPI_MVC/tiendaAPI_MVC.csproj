@@ -153,6 +153,12 @@
     <Compile Include="..\api_tienda\Models\Rol.cs">
       <Link>Models\Rol.cs</Link>
     </Compile>
+    <Compile Include="..\api_tienda\Models\Talla.cs">
+      <Link>Models\Talla.cs</Link>
+    </Compile>
+    <Compile Include="..\api_tienda\Models\TallasProducto.cs">
+      <Link>Models\TallasProducto.cs</Link>
+    </Compile>
     <Compile Include="..\api_tienda\Models\Usuario.cs">
       <Link>Models\Usuario.cs</Link>
     </Compile>
@@ -188,6 +194,25 @@
     <Content Include="Content\css\nice-select.css" />
     <Content Include="Content\css\nouislider.min.css" />
     <Content Include="Content\css\owl.carousel.css" />
+    <Content Include="Content\img-electronica\hotdeal.png" />
+    <Content Include="Content\img-electronica\logo.png" />
+    <Content Include="Content\img-electronica\paypal\pp_cc_mark_111x69.jpg" />
+    <Content Include="Content\img-electronica\paypal\pp_cc_mark_37x23.jpg" />
+    <Content Include="Content\img-electronica\paypal\pp_cc_mark_74x46.jpg" />
+    <Content Include="Content\img-electronica\product01.png" />
+    <Content Include="Content\img-electronica\product02.png" />
+    <Content Include="Content\img-electronica\product03.png" />
+    <Content Include="Content\img-electronica\product04.png" />
+    <Content Include="Content\img-electronica\product05.png" />
+    <Content Include="Content\img-electronica\product06.png" />
+    <Content Include="Content\img-electronica\product07.png" />
+    <Content Include="Content\img-electronica\product08.png" />
+    <Content Include="Content\img-electronica\product09.png" />
+    <Content Include="Content\img-electronica\productos-electronicos.jpg" />
+    <Content Include="Content\img-electronica\shop01.png" />
+    <Content Include="Content\img-electronica\shop02.png" />
+    <Content Include="Content\img-electronica\shop03.png" />
+    <Content Include="Content\img-electronica\webpay\webpay.png" />
     <Content Include="Content\img\br1.png" />
     <Content Include="Content\img\br2.png" />
     <Content Include="Content\img\br3.png" />

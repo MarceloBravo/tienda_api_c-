@@ -8,10 +8,9 @@ using System.Web;
 namespace api_tienda.Models
 {
     public class Marca
-    {
-        [Key]
+    {   
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int MarcaId { set; get; }
+        public long Id { set; get; }
 
         [Required(ErrorMessage = "El nombre de la marca es obligatorio.")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "El nombre de la marca debe tener entre 2 y 50 carácteres.")]
@@ -23,18 +22,12 @@ namespace api_tienda.Models
 
         public DateTime? Deleted_at { set; get; }
 
-        public virtual ICollection<Producto> Productos { set; get; }
+        //public virtual ICollection<Producto> Productos { set; get; }
         
-        public Marca()
-        {
-            this.Productos = new HashSet<Producto>();
-        }
+        //public Marca()
+        //{
+        //    this.Productos = new HashSet<Producto>();
+        //}
     }
-
-    /*
-    class MarcaDbContext: DbContext
-    {
-        public DbSet<Marca> Marcas { set; get; }
-    }
-    */
+    
 }

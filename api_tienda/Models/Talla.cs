@@ -11,7 +11,7 @@ namespace api_tienda.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TallaId { set; get; }
+        public int Id { set; get; }
         [Required(ErrorMessage = "Debe ingresar el nombre o descripción de la talla.")]
         [StringLength(10, MinimumLength = 1, ErrorMessage = "La talla debe tener entre 1 y 10 carácteres.")]
         public string Nombre{ set; get; }
@@ -19,11 +19,11 @@ namespace api_tienda.Models
         public DateTime Updated_at { set; get; }
         public DateTime? Deleted_at { set; get; }
         
-        public virtual ICollection<Producto> Productos { set; get; }
+        //public virtual ICollection<TallasProducto> TallasProducto { set; get; }
         
         public Talla()
         {
-            this.Productos = new HashSet<Producto>();
+            //this.TallasProducto = new HashSet<TallasProducto>();
         }
     }
 }

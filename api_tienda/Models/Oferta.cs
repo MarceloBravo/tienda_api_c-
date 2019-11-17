@@ -12,7 +12,7 @@ namespace api_tienda.Models
         private bool Portada = true;
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { set; get; }
+        public long Id { set; get; }
 
         [Required(ErrorMessage = "La imágen es obligatoria.")]
         [StringLength(1000, ErrorMessage = "La ruta a la imágen es demasiado larga.")]
@@ -32,7 +32,7 @@ namespace api_tienda.Models
 
         public DateTime Created_at { set; get; }
         public DateTime Updated_at { set => Updated_at = DateTime.Today; get => Updated_at; }
-        public DateTime Deleted_at { set; get; }
+        public DateTime? Deleted_at { set; get; }
     }
     /*
     class OfertaDbContext: DbContext

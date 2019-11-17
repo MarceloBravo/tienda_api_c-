@@ -45,7 +45,7 @@ namespace api_tienda.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != marca.MarcaId)
+            if (id != marca.Id)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace api_tienda.Controllers
             db.Marcas.Add(marca);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = marca.MarcaId }, marca);
+            return CreatedAtRoute("DefaultApi", new { id = marca.Id }, marca);
         }
 
         // DELETE: api/Marcas/5
@@ -113,7 +113,7 @@ namespace api_tienda.Controllers
 
         private bool MarcaExists(int id)
         {
-            return db.Marcas.Count(e => e.MarcaId == id) > 0;
+            return db.Marcas.Count(e => e.Id == id) > 0;
         }
     }
 }

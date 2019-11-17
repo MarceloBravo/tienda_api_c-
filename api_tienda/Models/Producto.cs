@@ -14,10 +14,9 @@ namespace api_tienda.Models
         private string Color = "#FFF";
         private bool Nuevo = true;
         private bool Oferta = false;
-
-        [Key]
+        
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductoId { set; get; }
+        public long Id { set; get; }
 
         [Required(ErrorMessage = "El nombre del producto es obligatorio.")]
         [StringLength(150, MinimumLength = 10, ErrorMessage = "El nombre del producto debe tener entre 10 y 150 carácteres.")]
@@ -54,18 +53,20 @@ namespace api_tienda.Models
         [Required(ErrorMessage = "Debe especificar si el producto está en oferta o no.")]
         [Range(typeof(bool), "false", "true", ErrorMessage = "Debe especificar si el producto está en oferta o no.")]
         public bool oferta { set => Oferta = value; get => Oferta; }
-        
+
+        //[ForeignKey("Categoria")]
         public long CategoriaId { set; get; }        
         public virtual Categoria Categoria { set; get; }
 
-        
-        public int MarcaId { set; get; }        
-        public Marca Marca { set; get; }
+        //[ForeignKey("Marca")]
+        public long MarcaId { set; get; }        
+        public virtual Marca Marca { set; get; }
         
         public ICollection<ImagenesProducto> Imagenes { set; get; }
         
-        public int TallaId { set; get; }        
-        public ICollection<Talla> Tallas {set; get;}        
+        //public int Talla_id { set; get; }
+        //[ForeignKey("Talla_id")]
+        //public ICollection<Talla> Tallas {set; get;}        
 
         public DateTime created_at { set;  get; }
         public DateTime Updated_at { set; get; }
@@ -75,7 +76,6 @@ namespace api_tienda.Models
         public Producto()
         {
             Updated_at = DateTime.Today;
-            //this.Imagenes = new HashSet<ImagenesProducto>();
         }
         
     }
