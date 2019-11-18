@@ -22,8 +22,18 @@ namespace tiendaAPI_MVC.Controllers
             List<Producto> productosList = new List<Producto>();
             try
             {
-                var json = await hc.GetStringAsync(endPoint + "ProductosHome");
-                productosList = JsonConvert.DeserializeObject<List<Producto>>(json);
+                var json = await hc.GetStringAsync(endPoint + "productos-categoria/7/4");
+                ViewBag.prodHombre = JsonConvert.DeserializeObject<List<Producto>>(json);
+
+                json = await hc.GetStringAsync(endPoint + "productos-categoria/8/4");
+                ViewBag.prodMujer = JsonConvert.DeserializeObject<List<Producto>>(json);
+
+                json = await hc.GetStringAsync(endPoint + "productos-categoria/9/4");
+                ViewBag.prodUnisex = JsonConvert.DeserializeObject<List<Producto>>(json);
+
+                json = await hc.GetStringAsync(endPoint + "DetalleOrdenes/12");
+                ViewBag.masVendidos = JsonConvert.DeserializeObject<List<DetalleOrden>>(json);
+                
             }
             catch (TaskCanceledException ex)
             {

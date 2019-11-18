@@ -32,6 +32,24 @@ namespace api_tienda.Controllers
             var prod = lstProductos.AsQueryable();
             return prod;
         }
+        
+        [Route("api/productos-categoria/{categoria}")]
+        [HttpGet]
+        public IQueryable<Producto> GetProductosCategoria(int categoria)
+        {
+            List<Producto> lstProducto = new List<Producto>();
+            lstProducto = db.Productos.Where(s => s.visible == true && s.CategoriaId == categoria).Include(s => s.Categoria).Include(s => s.Marca).Include(s => s.Imagenes).ToList();
+            return lstProducto.AsQueryable();
+        }
+
+        [Route("api/productos-categoria/{categoria}/{limit}")]
+        [HttpGet]
+        public IQueryable<Producto> GetProductosCategoria(int categoria,int limit)
+        {
+            List<Producto> lstProducto = new List<Producto>();
+            lstProducto = db.Productos.Where(s => s.visible == true && s.CategoriaId == categoria).Include(s => s.Categoria).Include(s => s.Marca).Include(s => s.Imagenes).Take(limit).ToList();
+            return lstProducto.AsQueryable();
+        }
 
         // GET: api/Productoes/5
         [ResponseType(typeof(Producto))]

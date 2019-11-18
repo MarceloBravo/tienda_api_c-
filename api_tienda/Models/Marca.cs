@@ -21,13 +21,6 @@ namespace api_tienda.Models
         public DateTime Updated_at { set; get; }
 
         public DateTime? Deleted_at { set; get; }
-
-        //public virtual ICollection<Producto> Productos { set; get; }
-        
-        //public Marca()
-        //{
-        //    this.Productos = new HashSet<Producto>();
-        //}
     }
     
 }

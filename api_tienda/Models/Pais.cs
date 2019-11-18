@@ -16,7 +16,7 @@ namespace api_tienda.Models
         public string Nombre { set; get; }
         public DateTime Created_at { set; get; }
         public DateTime Updated_at { set => Updated_at = DateTime.Today; get => Updated_at; }
-        public DateTime Deleted_at { set; get; }
+        public DateTime? Deleted_at { set; get; }
 
         public ICollection<Region> Regiones { set; get; }
     }
