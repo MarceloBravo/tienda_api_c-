@@ -43,8 +43,6 @@ namespace tiendaAPI_MVC.Controllers
             {
                 Exception e = ex;
             }
-            
-
 
             return View(productosList);
         }
