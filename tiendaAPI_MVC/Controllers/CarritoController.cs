@@ -16,6 +16,11 @@ namespace tiendaAPI_MVC.Controllers
         private static Dictionary<string, ItemCarrito> carrito = new Dictionary<string, ItemCarrito>();
         const string endPoint = "http://localhost:1612/api/";
         
+        public ActionResult Index()
+        {
+            return View(carrito);
+        }
+
         [HttpGet]       
         [Route("carrito/agregar-producto/{id}/{cantidad}")]
         public async Task<ActionResult> AgregarProducto(long id, int cantidad)

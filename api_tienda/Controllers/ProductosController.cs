@@ -55,7 +55,7 @@ namespace api_tienda.Controllers
         [ResponseType(typeof(Producto))]
         public IHttpActionResult GetProducto(int id)
         {
-            Producto producto = db.Productos.Find(id);
+            Producto producto = db.Productos.Where(p => p.Id == id).Include(p => p.Imagenes).FirstOrDefault();
             if (producto == null)
             {
                 return NotFound();
