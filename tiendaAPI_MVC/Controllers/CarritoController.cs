@@ -24,34 +24,25 @@ namespace tiendaAPI_MVC.Controllers
         [HttpGet]       
         [Route("carrito/agregar-producto/{id}/{cantidad}")]
         public async Task<ActionResult> AgregarProducto(long id, int cantidad)
-        {
-            HttpClient hc = new HttpClient();
+        {   
             try
             {
                 if (id == 0) { throw new System.ArgumentException("Código de producto no válido."); }
                 if (cantidad == 0) { throw new System.ArgumentException("Cantidad de producto no válida."); }
-
-                var json = await hc.GetStringAsync(endPoint + "productos/"+id);
-                Producto producto = JsonConvert.DeserializeObject<Producto>(json);
-                
-                if (producto != null)
+                if(cantidad >0 )
                 {
-                    ItemCarrito item = new ItemCarrito();                    
-                    if (!carrito.ContainsKey(id.ToString()))
-                    {                        
-                        item.producto = producto;
-                        item.cantidad = cantidad;
-                        carrito.Add(id.ToString(), item);
-                    }
-                    else
+                    HttpClient hc = new HttpClient();
+                    var json = await hc.GetStringAsync(endPoint + "productos/" + id);
+                    Producto producto = JsonConvert.DeserializeObject<Producto>(json);
+                    if(producto == null)
                     {
-                        item = carrito[id.ToString()];
-                        item.cantidad = item.cantidad + cantidad;
+                        throw new System.ArgumentException("El producto no fue encontrado.");
                     }
+                    this.agregarProductoAlCarrito(producto, cantidad);
                 }
                 else
                 {
-                    throw new System.ArgumentException("El producto no fue encontrado.");
+                    this.sumarCantidad(id, cantidad);       
                 }
             }
             catch (Exception e)
@@ -59,6 +50,42 @@ namespace tiendaAPI_MVC.Controllers
                 return Json(e, JsonRequestBehavior.AllowGet);
             }
             return Json(carrito, JsonRequestBehavior.AllowGet);
+        }
+
+
+        private void agregarProductoAlCarrito(Producto producto, int cantidad)
+        {
+            ItemCarrito item = new ItemCarrito();
+            if (!carrito.ContainsKey(producto.Id.ToString()))
+            {
+                item.producto = producto;
+                item.cantidad = cantidad;
+                carrito.Add(producto.Id.ToString(), item);
+            }
+            else
+            {
+                this.sumarCantidad(producto.Id, cantidad);
+            }
+        }
+
+
+        private void sumarCantidad(long id, int cantidad)
+        {
+            ItemCarrito item = carrito[id.ToString()];            
+            item.cantidad += cantidad;
+        }
+        
+        [HttpGet]
+        public ActionResult EfectuarPagoCompra()
+        {
+            return View(carrito);
+        }
+
+        [HttpGet]
+        public ActionResult VaciarCarrito()
+        {
+            carrito.Clear();
+            return RedirectToAction( "Index",new { carrito = carrito });
         }
     }
 }

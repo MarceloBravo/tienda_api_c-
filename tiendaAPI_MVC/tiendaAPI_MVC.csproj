@@ -196,7 +196,8 @@
     <Content Include="Content\css\nice-select.css" />
     <Content Include="Content\css\nouislider.min.css" />
     <Content Include="Content\css\owl.carousel.css" />
-    <Content Include="Content\custom\carrito.css" />
+    <Content Include="Content\css\custom\carrito.css" />
+    <Content Include="Content\css\custom\pago-compra.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\Linearicons-Free.svg" />
     <Content Include="Content\img-electronica\hotdeal.png" />
@@ -478,6 +479,7 @@
     <Content Include="Scripts\js\vendor\jquery-2.2.4.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\tienda\carrito.js" />
+    <Content Include="Scripts\tienda\tienda.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -494,6 +496,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\js\.DS_Store" />
     <Content Include="Views\Carrito\Index.cshtml" />
+    <Content Include="Views\Carrito\EfectuarPagoCompra.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

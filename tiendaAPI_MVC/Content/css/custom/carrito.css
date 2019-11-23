@@ -1,0 +1,16 @@
+﻿.img-item-carrito {
+    width: 100px;
+}
+
+.empty-cart, .empty-cart-message, .empty-cart-return-button{
+    width: 100%;
+    text-align: center;
+}
+
+.empty-cart{
+    font-size: 110px;
+}
+
+.empty-cart-return-button > a{
+    color: red;
+}

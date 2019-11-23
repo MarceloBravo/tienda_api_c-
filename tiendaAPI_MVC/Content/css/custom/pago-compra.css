@@ -1,0 +1,11 @@
+﻿.d-flex > h3{
+    padding-top: 15px;
+}
+
+.view-btn > img {
+    height: 100px;
+}
+
+.quantity-amount{
+    border: none !important;
+}

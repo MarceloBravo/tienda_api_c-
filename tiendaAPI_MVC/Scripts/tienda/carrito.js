@@ -1,12 +1,16 @@
-﻿function agregarProducto(id, cantidad)
-{
-    fetch(`carrito/agregarproducto?id=${id}&cantidad=${cantidad}`)
-        .then(resp => resp.json())
-        .then(function (data) {
-            alert("El producto fuen agregado.");
-        })
-        .catch(function (error) {
-            alert("Ocurrio un error al agregar el producto al carrito.");
-            console.log(error);
-        });
+﻿onload = function () {
+    this.document.getElementById("btnActualizarCarrito").onclick = carrito.actualizar;
+}
+
+var carrito = {
+    actualizar: function () {
+        fetch(`/carrito/getCarrito`)
+            .then(resp => resp.json())
+            .then(function (data) {
+
+            })
+            .catch(exception e){
+
+        }
+    }
 }
