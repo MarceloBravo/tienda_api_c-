@@ -16,7 +16,7 @@ namespace api_tienda.Controllers
         private TiendaContext db = new TiendaContext();
 
         
-        [Route("Carrito/ahrehar-producto/{id}/{cantidad}")]
+        [Route("Carrito/agregar-producto/{id}/{cantidad}")]
         [HttpGet]
         public IHttpActionResult AgregarProducto(long id, int cantidad)
         {

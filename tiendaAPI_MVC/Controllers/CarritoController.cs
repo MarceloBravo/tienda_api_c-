@@ -78,6 +78,10 @@ namespace tiendaAPI_MVC.Controllers
         [HttpGet]
         public ActionResult EfectuarPagoCompra()
         {
+            if(Session["USUARIO"] == null)
+            {
+                return Redirect("/login");
+            }
             return View(carrito);
         }
 
