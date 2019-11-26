@@ -144,6 +144,9 @@
     <Compile Include="..\api_tienda\Models\ImagenesProducto.cs">
       <Link>Models\ImagenesProducto.cs</Link>
     </Compile>
+    <Compile Include="..\api_tienda\Models\Login.cs">
+      <Link>Models\Login.cs</Link>
+    </Compile>
     <Compile Include="..\api_tienda\Models\Marca.cs">
       <Link>Models\Marca.cs</Link>
     </Compile>
@@ -201,6 +204,7 @@
     <Content Include="Content\css\availability-calendar.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\custom\login.css" />
+    <Content Include="Content\css\custom\alertModal.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\ion.rangeSlider.css" />
     <Content Include="Content\css\ion.rangeSlider.skinFlat.css" />
@@ -515,6 +519,7 @@
     <Content Include="Views\Carrito\Index.cshtml" />
     <Content Include="Views\Carrito\EfectuarPagoCompra.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialAlertModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

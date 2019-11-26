@@ -27,6 +27,7 @@
     @Styles.Render("~/Content/css/ion.rangeSlider.skinFlat.css")
     @Styles.Render("~/Content/css/bootstrap.css")
     @Styles.Render("~/Content/css/main.css")
+    @Styles.Render("~/Content/css/custom/alertModal.css")
 </head>
 <body>
 
@@ -115,148 +116,146 @@
     <!-- Start men-product Area -->
     @if (ViewBag.prodHombre.Count > 0)
     {
-    <section class="men-product-area section-gap relative" id="men">
-        <div class="overlay overlay-bg"></div>
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="menu-content pb-40">
-                    <div class="title text-center">
-                        <h1 class="text-white mb-10">Nuevos Productos Para Hombre</h1>
-                        <p class="text-white">Todos cuentan con entrega en tienda o despacho a domicilio.</p>
+        <section class="men-product-area section-gap relative" id="men">
+            <div class="overlay overlay-bg"></div>
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="menu-content pb-40">
+                        <div class="title text-center">
+                            <h1 class="text-white mb-10">Nuevos Productos Para Hombre</h1>
+                            <p class="text-white">Todos cuentan con entrega en tienda o despacho a domicilio.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-               @foreach (var producto in ViewBag.prodHombre)
-                {
+                <div class="row">
+                    @foreach (var producto in ViewBag.prodHombre)
+                    {
 
-                    <div class="col-lg-3 col-md-6 single-product">
-                        <div class="content">
-                            <div class="content-overlay"></div>
-                            @{
-                                var imgs = new List<ImagenesProducto>(producto.Imagenes);
-                                if (imgs.Count > 0)
-                                {
-                                    ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
-                                    <img class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+                        <div class="col-lg-3 col-md-6 single-product">
+                            <div class="content">
+                                <div class="content-overlay"></div>
+                                @{
+                                    var imgs = new List<ImagenesProducto>(producto.Imagenes);
+                                    if (imgs.Count > 0)
+                                    {
+                                        ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
+                                        <img class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+                                    }
                                 }
-                            }
-                            <div class="content-details fadeIn-bottom">
-                                <div class="bottom d-flex align-items-center justify-content-center">
-                                    <a href="#"><span class="lnr lnr-heart"></span></a>
-                                    <a href="#"><span class="lnr lnr-layers"></span></a>
-                                    <a href="#" onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
-                                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                                <div class="content-details fadeIn-bottom">
+                                    <div class="bottom d-flex align-items-center justify-content-center">
+                                        <a href="#"><span class="lnr lnr-heart"></span></a>
+                                        <a href="#"><span class="lnr lnr-layers"></span></a>
+                                        <a onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
+                                        <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="price">
+                                @{
+                                    <h5 class="text-white">@producto.Nombre</h5>
+                                    <h3 class="text-white">$ @producto.Precio</h3>
+                                }
+                            </div>
                         </div>
-                        <div class="price">
-                            @{
-                                <h5 class="text-white">@producto.Nombre</h5>
-                                <h3 class="text-white">$ @producto.Precio</h3>
-                            }
-                        </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     }
     <!-- End men-product Area -->
     <!-- Start women-product Area -->
-   @if (ViewBag.prodMujer.Count > 0)
+    @if (ViewBag.prodMujer.Count > 0)
     {
-    <section class="women-product-area section-gap" id="women">
-        <div class="container">
-            <div class="countdown-content pb-40">
-                <div class="title text-center">
-                    <h1 class="mb-10">Nuevos Productos Para Mujer</h1>
-                    <p>Todos cuentan con entrega en tienda o despacho a domicilio.</p>
+        <section class="women-product-area section-gap" id="women">
+            <div class="container">
+                <div class="countdown-content pb-40">
+                    <div class="title text-center">
+                        <h1 class="mb-10">Nuevos Productos Para Mujer</h1>
+                        <p>Todos cuentan con entrega en tienda o despacho a domicilio.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                @foreach (var producto in ViewBag.prodMujer)
-                 {
+                <div class="row">
+                    @foreach (var producto in ViewBag.prodMujer)
+                    {
 
-                    <div class="col-lg-3 col-md-6 single-product">
-                        <div class="content">
-                            <div class="content-overlay"></div>
-                            @{
-                                var imgs = new List<ImagenesProducto>(producto.Imagenes);
-                                if (imgs.Count > 0)
-                                {
-                                    ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
-                                    <img class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+                        <div class="col-lg-3 col-md-6 single-product">
+                            <div class="content">
+                                <div class="content-overlay"></div>
+                                @{
+                                    var imgs = new List<ImagenesProducto>(producto.Imagenes);
+                                    if (imgs.Count > 0)
+                                    {
+                                        ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
+                                        <img class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+                                    }
                                 }
-                            }
-                            <div class="content-details fadeIn-bottom">
-                                <div class="bottom d-flex align-items-center justify-content-center">
-                                    <a href="#"><span class="lnr lnr-heart"></span></a>
-                                    <a href="#"><span class="lnr lnr-layers"></span></a>
-                                    <a href="#"  onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
-                                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                                <div class="content-details fadeIn-bottom">
+                                    <div class="bottom d-flex align-items-center justify-content-center">
+                                        <a href="#"><span class="lnr lnr-heart"></span></a>
+                                        <a href="#"><span class="lnr lnr-layers"></span></a>
+                                        <a onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
+                                        <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="price">
+                                <h5>@producto.Nombre</h5>
+                                <h3>$ @producto.Precio</h3>
+                            </div>
                         </div>
-                        <div class="price">
-                            <h5>@producto.Nombre</h5>
-                            <h3>$ @producto.Precio</h3>
-                        </div>
-                    </div>
-                 }
+                    }
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     }
     <!-- End women-product Area -->
-
     <!-- Start electrónic-product Area -->
     @if (ViewBag.prodUnisex.Count > 0)
     {
-    <section class="women-product-area section-gap" id="unisex">
-        <div class="container">
-            <div class="countdown-content pb-40">
-                <div class="title text-center">
-                    <h1 class="mb-10">Nueva Ropa Unisex</h1>
-                    <p>Todos cuentan con entrega en tienda o despacho a domicilio.</p>
+        <section class="women-product-area section-gap" id="unisex">
+            <div class="container">
+                <div class="countdown-content pb-40">
+                    <div class="title text-center">
+                        <h1 class="mb-10">Nueva Ropa Unisex</h1>
+                        <p>Todos cuentan con entrega en tienda o despacho a domicilio.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                @foreach (var producto in ViewBag.prodUnisex)
-                {
+                <div class="row">
+                    @foreach (var producto in ViewBag.prodUnisex)
+                    {
 
-                    <div class="col-lg-3 col-md-6 single-product">
-                        <div class="content">
-                            <div class="content-overlay"></div>
-                            @{
-                                var imgs = new List<ImagenesProducto>(producto.Imagenes);
-                                if (imgs.Count > 0)
-                                {
-                                    ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
-                                    <img class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+                        <div class="col-lg-3 col-md-6 single-product">
+                            <div class="content">
+                                <div class="content-overlay"></div>
+                                @{
+                                    var imgs = new List<ImagenesProducto>(producto.Imagenes);
+                                    if (imgs.Count > 0)
+                                    {
+                                        ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
+                                        <img class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+                                    }
                                 }
-                            }
-                            <div class="content-details fadeIn-bottom">
-                                <div class="bottom d-flex align-items-center justify-content-center">
-                                    <a href="#"><span class="lnr lnr-heart"></span></a>
-                                    <a href="#"><span class="lnr lnr-layers"></span></a>
-                                    <a href="#" onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
-                                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                                <div class="content-details fadeIn-bottom">
+                                    <div class="bottom d-flex align-items-center justify-content-center">
+                                        <a href="#"><span class="lnr lnr-heart"></span></a>
+                                        <a href="#"><span class="lnr lnr-layers"></span></a>
+                                        <a onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
+                                        <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="price">
+                                <h5>@producto.Nombre</h5>
+                                <h3>$ @producto.Precio</h3>
+                            </div>
                         </div>
-                        <div class="price">
-                            <h5>@producto.Nombre</h5>
-                            <h3>$ @producto.Precio</h3>
-                        </div>
-                    </div>
-                 }
+                    }
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     }
     <!-- End women-product Area -->
-
     <!-- Start Count Down Area -->
     <div class="countdown-area">
         <div class="container">
@@ -299,39 +298,39 @@
     </div>
     <!-- End Count Down Area -->
     <!-- Start related-product Area -->
-   @if (ViewBag.masVendidos.Count > 0)
+    @if (ViewBag.masVendidos.Count > 0)
     {
-    <section class="related-product-area section-gap" id="latest">
-        <div class="container">
-            <div class="related-content">
-                <div class="title text-center">
-                    <h1 class="mb-10">Algunos de los productos más vendidos</h1>
-                    <p>Puede que te interecen ya que muchos los han preferido.</p>
-                </div>
-            </div>
-            <div class="row">
-               @foreach (var orden in ViewBag.masVendidos)
-                {
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-                    <div class="single-related-product d-flex">
-                        @{ 
-                            var imgs = new List<ImagenesProducto>(orden.Producto.Imagenes);
-                            if (imgs.Count > 0)
-                            {
-                                ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
-                                <a href="#"><img src="@Url.Content(img.Ubicacion)" alt=""></a>
-                                <div class="desc">
-                                    <a href="#" class="title">producto.Nombre</a>
-                                    <div class="price"><span class="lnr lnr-tag"></span> $ @orden.Producto.Precio</div>
-                                </div>
-                            }
-                         }
+        <section class="related-product-area section-gap" id="latest">
+            <div class="container">
+                <div class="related-content">
+                    <div class="title text-center">
+                        <h1 class="mb-10">Algunos de los productos más vendidos</h1>
+                        <p>Puede que te interecen ya que muchos los han preferido.</p>
                     </div>
                 </div>
-                }
+                <div class="row">
+                    @foreach (var orden in ViewBag.masVendidos)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
+                            <div class="single-related-product d-flex">
+                                @{
+                                    var imgs = new List<ImagenesProducto>(orden.Producto.Imagenes);
+                                    if (imgs.Count > 0)
+                                    {
+                                        ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
+                                        <a href="#"><img src="@Url.Content(img.Ubicacion)" alt=""></a>
+                                        <div class="desc">
+                                            <a href="#" class="title">producto.Nombre</a>
+                                            <div class="price"><span class="lnr lnr-tag"></span> $ @orden.Producto.Precio</div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     }
     <!-- End related-product Area -->
     <!-- Start brand Area -->
@@ -357,6 +356,8 @@
         </div>
     </section>
     <!-- End brand Area -->
+
+    @Html.Partial("~/Views/Shared/_PartialAlertModal.cshtml")
 
     @Scripts.Render("~/Scripts/js/vendor/jquery-2.2.4.min.js")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>

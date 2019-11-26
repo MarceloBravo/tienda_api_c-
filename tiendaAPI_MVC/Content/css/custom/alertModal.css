@@ -1,0 +1,15 @@
+﻿#exampleModal > .modal-dialog{
+    top: 30%;
+}
+
+.modal-header {
+    justify-content: flex-end;
+}
+
+.modal-title {
+    width: 55%;
+}
+
+.btn {
+    font-size: inherit;
+}

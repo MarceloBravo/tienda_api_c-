@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
 
 namespace tiendaAPI_MVC.Controllers
@@ -26,26 +27,15 @@ namespace tiendaAPI_MVC.Controllers
         {
             try
             {
-                /*
-                using (HttpClient hc = new HttpClient())
+                Login loginData = new Login()
                 {
-                    hc.BaseAddress = new Uri(endPoint + "login/autenticar");
-                    var postResponse = await hc.PostAsJsonAsync(nickname, password);
-                    postResponse.Await();
-                    var result = postResponse.Result;
-                }
-                */
-                Dictionary<string, string> param = new Dictionary<string, string>();
-                param.Add("nicknameOrEmail",nickname);
-                param.Add("password",password);
-
+                    nicknameOrEmail = nickname,
+                    password = password
+                };
+                //HttpContent content = new StringContent(loginData.ToString(), Encoding.UTF8, "application/json");
                 HttpClient hc = new HttpClient();
-                var resp = await hc.PostAsJsonAsync(endPoint + "login/autenticar", param);
-                resp.EnsureSuccessStatusCode();
+                var response = hc.PostAsJsonAsync(endPoint + "login/autenticar", loginData).Result;
 
-                var json = JsonConvert.SerializeObject(param);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await hc.PostAsync(endPoint + "login/autenticar", content).ConfigureAwait(false);
                 Usuario usuario = new Usuario();
                 if (response.IsSuccessStatusCode)
                 {
@@ -54,17 +44,17 @@ namespace tiendaAPI_MVC.Controllers
                     Session["USUARIO"] = usuario;
                 }
 
-                if(usuario.Nombre == null)
+                if (usuario.Nombre == null)
                 {
                     throw new System.ArgumentException("Usuario o contraseña no existente.");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Response.StatusCode = 500;
                 return Json(e.Message); 
             }
-            return Redirect("/carrito/EfectuarPagoCompra");
+            return Json(true);
         }
              
     }

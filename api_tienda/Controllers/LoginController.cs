@@ -16,18 +16,19 @@ namespace api_tienda.Controllers
         private TiendaContext db = new TiendaContext();
 
 
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Autenticar(string nicknameOrEmail, string password)
+        //[ResponseType(typeof(void))]
+        [HttpPost]
+        public IHttpActionResult Autenticar([FromBody]Login loginData)
         {
             Usuario user = new Usuario();
             try
             {
-                user = db.Usuarios.FirstOrDefault(u => u.Nickname.Equals(nicknameOrEmail) || u.Email.Equals(nicknameOrEmail));                                
+                user = db.Usuarios.FirstOrDefault(u => u.Nickname.Equals(loginData.nicknameOrEmail) || u.Email.Equals(loginData.nicknameOrEmail));
 
                 if(user == null)
                     return BadRequest("Usuario no existente.");
 
-                if(Crypto.VerifyHashedPassword(user.Password, password))
+                if(Crypto.VerifyHashedPassword(user.Password, loginData.password))
                     return Ok(user);
 
                 throw new System.ApplicationException("Contraseña incorrecta.");

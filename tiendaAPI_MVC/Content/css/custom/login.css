@@ -1,4 +1,14 @@
-﻿.div-form {
+﻿.organic-breadcrumb {
+    margin-bottom: 50px !important;
+}
+
+#alert-message {
+    margin: 0px 50px;
+    display:none;
+    opacity: 1;
+}
+
+.div-form {
     padding-left: calc(100% / 3);
 }
 

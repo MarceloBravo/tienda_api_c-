@@ -74,6 +74,9 @@ namespace tiendaAPI_MVC.Controllers
             ItemCarrito item = carrito[id.ToString()];            
             item.cantidad += cantidad;
         }
+
+
+
         
         [HttpGet]
         public ActionResult EfectuarPagoCompra()

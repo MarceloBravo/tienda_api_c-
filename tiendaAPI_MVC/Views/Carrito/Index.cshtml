@@ -10,6 +10,7 @@
 @Styles.Render("~/Content/css/bootstrap.css")
 @Styles.Render("~/Content/css/main.css")
 @Styles.Render("~/Content/css/custom/carrito.css")
+@Styles.Render("~/Content/css/custom/alertModal.css")
 <!-- Start Banner Area -->
 <section class="banner-area organic-breadcrumb">
     <div class="container">
@@ -25,8 +26,8 @@
     </div>
 </section>
 <!-- End Banner Area -->
-@{ 
-    if(Model.Count > 0)
+@{
+    if (Model.Count > 0)
     {
         <!-- Start Cart Area -->
         <div class="container">
@@ -45,7 +46,7 @@
                         <h6>Total</h6>
                     </div>
                 </div>
-            </div>    
+            </div>
             <div class="cart-single-item">
                 @{
                     decimal totalProducto = 0;
@@ -64,7 +65,7 @@
                             </div>
                             <div class="col-md-2 col-6">
                                 <div class="quantity-container d-flex align-items-center mt-15">
-                                    <input type="text" class="quantity-amount" value="@item.Value.cantidad" />
+                                    <input type="text" class="quantity-amount" id="cantidad-@item.Value.producto.Id" value="@item.Value.cantidad" />
                                     <div class="arrow-btn d-inline-flex flex-column">
                                         <button class="increase arrow" type="button" title="Agregar producto" onclick="agregarProducto(@item.Value.producto.Id, 1)"><span class="lnr lnr-chevron-up"></span></button>
                                         <button class="decrease arrow" type="button" title="Quitar producto" onclick="agregarProducto(@item.Value.producto.Id, -1)"><span class="lnr lnr-chevron-down"></span></button>
@@ -75,26 +76,26 @@
                                 @{
                                     totalProducto = item.Value.producto.Precio * item.Value.cantidad;
                                     totalVenta += totalProducto;
-                                    <div class="total">$@totalProducto</div>
+                                    <div class="total" id="precio-@item.Value.producto.Id">$@totalProducto.ToString("###,###,###")</div>
                                 }
                             </div>
                         </div>
-                                    }
+                    }
                 }
             </div>
             <div class="subtotal-area d-flex align-items-center justify-content-end">
-                <div class="title text-uppercase">Subtotal</div>
-                <div class="subtotal">$@totalVenta</div>
+                <div class="title text-uppercase">Total Venta</div>
+                <div class="subtotal" id="totalVenta">$@totalVenta.ToString("###,###,###,###")</div>
             </div>
             <div class="cupon-area d-flex align-items-center justify-content-between flex-wrap">
-                <a href="#" class="view-btn color-2"><span>Actualizar el Carrito</span></a>
                 <a href="/Carrito/VaciarCarrito" class="view-btn color-2"><span>Vaciar carrito</span></a>
                 <a href="/Carrito/EfectuarPagoCompra" class="view-btn color-2"><span>Continuar</span></a>
             </div>
         </div>
         <!-- End Cart Area -->
     }
-    else{
+    else
+    {
         <div>
             <h2 class="empty-cart-message">Tu carrito está vacío</h2>
             <p><i class="fa fa-shopping-cart empty-cart"></i></p>
@@ -105,6 +106,7 @@
     }
 }
 
+@Html.Partial("~/Views/Shared/_PartialAlertModal.cshtml")
 
 @Scripts.Render("~/Scripts/js/vendor/jquery-2.2.4.min.js")
 <script type="text/javascript" https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -115,4 +117,5 @@
 @Scripts.Render("~/Scripts/js/ion.rangeSlider.js")
 @Scripts.Render("~/Scripts/js/jquery.magnific-popup.min.js")
 @Scripts.Render("~/Scripts/js/owl.carousel.min.js")
-@Scripts.Render("~/Scripts/js/main.js")  
+@Scripts.Render("~/Scripts/js/main.js")
+@Scripts.Render("~/Scripts/tienda/carrito.js")  

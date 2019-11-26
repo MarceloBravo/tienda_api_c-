@@ -200,6 +200,7 @@
     <Compile Include="Models\DetalleOrden.cs" />
     <Compile Include="Models\ImagenesProducto.cs" />
     <Compile Include="Models\ItemCarrito.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Marca.cs" />
     <Compile Include="Models\Oferta.cs" />
     <Compile Include="Models\Orden.cs" />
