@@ -75,7 +75,11 @@ namespace tiendaAPI_MVC.Controllers
             item.cantidad += cantidad;
         }
 
-
+        [HttpGet, Route("carrito/productos")]
+        public ActionResult GetCarrito()
+        {
+            return Json(carrito, JsonRequestBehavior.AllowGet);
+        }
 
         
         [HttpGet]

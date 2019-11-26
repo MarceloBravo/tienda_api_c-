@@ -8,6 +8,11 @@ function agregarProducto(id, cantidad)
     fetch(`carrito/agregarproducto?id=${id}&cantidad=${cantidad}`)
         .then(resp => resp.json())
         .then(function (data) {
+            var cantidad = 0;           
+            Object.entries(data).forEach(function (elem, index) {
+                cantidad += eval(elem[1].cantidad)
+            })
+            document.getElementById("lbl-carrito").innerHTML = cantidad;
             document.getElementById("exampleModal").style.display = "block";
             document.getElementById("modalMessage").innerHTML = "El producto fue agregado a tu carrito de compras.";
             document.getElementById("modalTitle").innerHTML = "Producto agregado.";
@@ -19,6 +24,7 @@ function agregarProducto(id, cantidad)
             console.log(error);
         });
 }
+
 
 
 var modal = {
