@@ -15,10 +15,15 @@ namespace api_tienda.Models
         [StringLength(50, MinimumLength = 5, ErrorMessage = "El nombre del pais debe tener entre 5 y 50 carácteres.")]
         public string Nombre { set; get; }
         public DateTime Created_at { set; get; }
-        public DateTime Updated_at { set => Updated_at = DateTime.Today; get => Updated_at; }
+        public DateTime Updated_at { set; get; }
         public DateTime? Deleted_at { set; get; }
 
         public ICollection<Region> Regiones { set; get; }
+
+        public Pais()
+        {
+            this.Updated_at = DateTime.Today;
+        }
     }
     /*
     class PaisDbContext: DbContext

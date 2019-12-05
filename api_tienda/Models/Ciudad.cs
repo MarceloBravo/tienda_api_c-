@@ -12,17 +12,22 @@ namespace api_tienda.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { set; get; }
         [Required(ErrorMessage = "El nombre de la ciudad es obligatorio.")]
-        [StringLength(5, MinimumLength =50, ErrorMessage = "El nombre de la ciudad es obligatorio.")]
+        [StringLength(50, MinimumLength =5, ErrorMessage = "El nombre de la ciudad es obligatorio.")]
         public string Nombre { set; get; }
         [Required(ErrorMessage = "La comuna es obligatoria")]
         public int IdComuna { set; get; }
         public Comuna Comuna { set; get; }
 
         public DateTime Created_at { set; get; }
-        public DateTime Updated_at { set => Updated_at = DateTime.Today; get => Updated_at; }
+        public DateTime Updated_at { set; get; }
         public DateTime? Deleted_at { set; get; }
 
         public ICollection<Usuario> Usuarios { set; get; }
+
+        public Ciudad()
+        {
+             this.Updated_at = DateTime.Today;
+        }
     }
     /*
     class CiudadDbContext: DbContext

@@ -37,11 +37,11 @@ namespace api_tienda.Models
         public string Nickname { set; get; }
 
         [Required(ErrorMessage = "Debe ingresar la contraseña del usuario.")]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "La contraseña ha de tener entre 6 y 20 carácteres.")]        
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "La contraseña ha de tener entre 6 y 100 carácteres.")]        
         public string Password { set; get; }
 
         [Required(ErrorMessage = "El campo activo es obligatorio.")]
-        [Range(typeof(bool), "true", "false", ErrorMessage = "El campo activo sólo acepta valores como Verdadero o Falso.")]
+        [Range(typeof(bool), "false", "true", ErrorMessage = "El campo activo sólo acepta valores como Verdadero o Falso.")]
         public bool activo { set => Activo = value; get => Activo; }
 
         [Required(ErrorMessage = "La dirección del usuario es obligatoria.")]
@@ -60,8 +60,13 @@ namespace api_tienda.Models
         public Ciudad Ciudad { set; get; }
 
         public DateTime Created_at { set; get; }
-        public DateTime Updated_at { set => Updated_at = DateTime.Today; get => Updated_at; }
+        public DateTime Updated_at { set; get; }
         public DateTime? Deleted_at { set; get; }
+
+        public Usuario()
+        {
+            Updated_at = DateTime.Today;
+        }
     }
     /*
     class UsuarioDbContext: DbContext

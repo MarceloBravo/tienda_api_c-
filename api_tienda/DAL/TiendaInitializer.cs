@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 
 namespace api_tienda.DAL
 {
@@ -107,12 +108,76 @@ namespace api_tienda.DAL
                 new ImagenesProducto{Ubicacion = "Content/img/cd.png", predeterminada = true, nombreArchivo = "product09.png", ProductoId = 18, Created_at =DateTime.Today, Updated_at=DateTime.Today, Deleted_at = null },
                 new ImagenesProducto{Ubicacion = "Content/img/i1.jpg", predeterminada = true, nombreArchivo = "product09.png", ProductoId = 19, Created_at =DateTime.Today, Updated_at=DateTime.Today, Deleted_at = null },
                 new ImagenesProducto{Ubicacion = "Content/img/i5.jpg", predeterminada = true, nombreArchivo = "product09.png", ProductoId = 20, Created_at =DateTime.Today, Updated_at=DateTime.Today, Deleted_at = null },
-                new ImagenesProducto{Ubicacion = "Content/img/i8.jpg", predeterminada = true, nombreArchivo = "product09.png", ProductoId = 21, Created_at =DateTime.Today, Updated_at=DateTime.Today, Deleted_at = null }
-                
+                new ImagenesProducto{Ubicacion = "Content/img/i8.jpg", predeterminada = true, nombreArchivo = "product09.png", ProductoId = 21, Created_at =DateTime.Today, Updated_at=DateTime.Today, Deleted_at = null }                
             };
             imagenesProducto.ForEach(img => context.ImagenesProductos.Add(img));
             context.SaveChanges();
+
+            var paises = new List<Pais>
+            {
+                new Pais{ Nombre="Chile", Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                
+            };
+            paises.ForEach(t => context.Paises.Add(t));
+            context.SaveChanges();
+
+            var regiones = new List<Region>
+            {
+                new Region{ Nombre="Metropolitana", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Tarapaca", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Antofagasta", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Atacama", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Coquimbo", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Valparaiso", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Libertador Bernardo O'Higgins", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Maule", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Concepción", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Araucanía", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Los Lagos", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Aysen del General Carlos Ibañes del Campo", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Magallanes y de la Antartica Chilena", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Los Rios", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Arica y Parinacota", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Region{ Nombre="Ñuble", IdPais = 1,Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null}
+            };
+            regiones.ForEach(t => context.Regiones.Add(t));
+            context.SaveChanges();
+
+            var comunas = new List<Comuna>
+            {
+                new Comuna{ Nombre="Talca", IdRegion = 7, Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Comuna{ Nombre="Curico", IdRegion = 7, Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Comuna{ Nombre="Maule", IdRegion = 7, Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null}
+
+            };
+            comunas.ForEach(t => context.Comunas.Add(t));
+            context.SaveChanges();
+
+            var ciudades = new List<Ciudad>
+            {
+                new Ciudad{ Nombre="Talca", IdComuna= 1, Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null}
+            };
+            ciudades.ForEach(t => context.Ciudades.Add(t));
+            context.SaveChanges();
+
+            var roles = new List<Rol>
+            {
+                new Rol{ Nombre="Administrador", Descripcion= "Rol para el usuario administrador del sistema.", Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Rol{ Nombre="Cliente", Descripcion= "Rol para el cliente de la tienda.", Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+            };
+            roles.ForEach(t => context.Roles.Add(t));
+            context.SaveChanges();
+
             
+            string salt = Crypto.GenerateSalt();
+
+            var usuarios = new List<Usuario>
+            {   
+                new Usuario{ Nombre="Marcelo", APaterno = "Bravo", AMaterno = "Castillo", Email = "mabc@live.cl", Nickname = "marcelo", Password = Crypto.HashPassword("1234567"), activo = true, Direccion = "1 Sur 2 Norte #123", fono = "0987654321", IdRol = 1, IdCiudad = 1, Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null},
+                new Usuario{ Nombre="Juan", APaterno = "Pérez", AMaterno = "Pereira", Email = "mabc@live.cl", Nickname = "jperez", Password = Crypto.HashPassword("1234567"), activo = true, Direccion = "1 Sur 2 Norte #123", fono = "0987654321", IdRol = 1, IdCiudad = 1, Created_at = DateTime.Today, Updated_at = DateTime.Today, Deleted_at = null}
+            };
+            usuarios.ForEach(t => context.Usuarios.Add(t));
+            context.SaveChanges();
         }
     }
 }

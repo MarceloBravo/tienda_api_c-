@@ -89,6 +89,10 @@ namespace tiendaAPI_MVC.Controllers
             {
                 return Redirect("/login");
             }
+            if(carrito.Count == 0)
+            {
+                return Redirect("/home");
+            }
             return View(carrito);
         }
 

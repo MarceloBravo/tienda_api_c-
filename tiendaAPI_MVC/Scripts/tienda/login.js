@@ -11,8 +11,8 @@ var botones = {
         fetch("/login/autenticar", { method: 'POST', body: new URLSearchParams(`nickname=${nick}&password=${pwd}`) })
             .then(resp => resp.json())
             .then(function (response) {
-                if (response.ok) {
-                    window.location = "/Carrito/EfectuarPago";
+                if (response) {
+                    window.location = "/Carrito/EfectuarPagoCompra";
                 } else {
                     document.getElementById("alert-message").style.display = "block";
                     document.getElementById("msg-error").innerHTML = response;
