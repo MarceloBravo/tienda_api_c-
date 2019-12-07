@@ -93,6 +93,7 @@ namespace tiendaAPI_MVC.Controllers
             {
                 return Redirect("/home");
             }
+            Session["carrito"] = carrito;
             return View(carrito);
         }
 
@@ -100,6 +101,7 @@ namespace tiendaAPI_MVC.Controllers
         public ActionResult VaciarCarrito()
         {
             carrito.Clear();
+            Session["carrito"] = carrito;
             return RedirectToAction( "Index",new { carrito = carrito });
         }
     }

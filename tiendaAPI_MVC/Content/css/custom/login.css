@@ -16,3 +16,7 @@
     width: 100%;
     text-align: center;
 }
+
+.form-control{
+    font-size: initial !important;
+}

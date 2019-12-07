@@ -79,14 +79,14 @@
     </div>
     <div class="subtotal-area d-flex align-items-center justify-content-end">
         <div class="title text-uppercase">Total a Pagar</div>
-        <div class="subtotal">$@totalVenta</div>
+        <div class="subtotal">$@totalVenta.ToString("###,###,###")</div>
     </div>
     <div class="d-flex align-items-center justify-content-center">
         <h3>Seleccione el método de pago:</h3>
     </div>
     <div class="cupon-area d-flex align-items-center justify-content-between flex-wrap">
         <a href="#" class="view-btn"><img src="~/Content/img-electronica/webpay/webpay.png" /></a>
-        <a href="#" class="view-btn"><img src="~/Content/img-electronica/paypal/pp_cc_mark_74x46.jpg" /></a>
+        <a href="/Paypal/PaymentWithPaypal" class="view-btn"><img src="~/Content/img-electronica/paypal/pp_cc_mark_74x46.jpg" /></a>
     </div>
 </div>
 <!-- End Cart Area -->
