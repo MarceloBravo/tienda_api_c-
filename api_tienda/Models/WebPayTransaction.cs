@@ -22,10 +22,10 @@ namespace api_tienda.Models
         public string BuyOrder { set; get; }
 
         [StringLength(30, ErrorMessage = "El número de tarjeta de crédito es demasiado largo.")]
-        public string CardNumber { set; get; }
+        public String CardNumber { set; get; }
         
         [StringLength(255, ErrorMessage = "La fecha de expiración de la tarjeta es demaciado larga.")]
-        public string CardExpirationDate { set; get; }
+        public String CardExpirationDate { set; get; }
         public int AuthorizationCode { set; get; }
         public string PaymentTypeCode { set; get; }
         public int ResponseCode { set; get; }

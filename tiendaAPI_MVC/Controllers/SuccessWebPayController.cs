@@ -15,16 +15,10 @@ namespace tiendaAPI_MVC.Controllers
         private static Dictionary<string, ItemCarrito> carrito = new Dictionary<string, ItemCarrito>();
         public ActionResult Index()
         {
-            RegistrarVenta();
             EnviarCorreoVenta();
             ViewBag.usuario = (Usuario)Session["USUARIO"];
             carrito = (Dictionary<string, ItemCarrito>)Session["carrito"];
             return View(carrito);
-        }
-
-        private void RegistrarVenta()
-        {
-
         }
 
         private void EnviarCorreoVenta()

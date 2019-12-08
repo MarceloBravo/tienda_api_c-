@@ -1,13 +1,14 @@
-﻿using PayPal.Api;
+﻿using api_tienda.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using PayPal.Api;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+using System.Globalization;
 using System.Net.Http;
-using System.Web.Http;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using tiendaAPI_MVC.Models;
-using System.Globalization;
 
 
 /*
@@ -141,16 +142,16 @@ namespace tiendaAPI_MVC.Controllers
                 }
             }
             catch (PayPal.PayPalException ex)
-            {   
+            {
                 //Logger.Log("Error: " + ex.Message);
                 return View("FailureView");
             }
-
-            return View("SuccessView");
+            return Redirect("/SuccessWebPay");
+            //return View("SuccessView");
         }
 
 
-        public ActionResult PaymentWithPaypal()
+        public async Task<ActionResult> PaymentWithPaypal()
         {
             //getting the apiContext as earlier
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
@@ -177,8 +178,17 @@ namespace tiendaAPI_MVC.Controllers
 
                     //CreatePayment function gives us the payment approval url
                     //on which payer is redirected for paypal account payment
-
-                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid);
+                    decimal dollar = await GetDollar();
+                    if(dollar == -1)
+                    {
+                        throw new System.ArgumentException("Ocurrió un error al intemntar obtener el valor del dollar.");
+                    }
+                    long numDocumento = await GetNumDocumento();
+                    if (numDocumento == -1)
+                    {
+                        throw new System.ArgumentException("Ocurrió un error al intemntar obtener el numero del documento a emitir.");
+                    }
+                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, dollar, (numDocumento+1));
 
                     //get links returned from paypal in response to Create function call
 
@@ -227,6 +237,8 @@ namespace tiendaAPI_MVC.Controllers
                 return View("FailureView");
             }
 
+            RegistrarVenta();
+
             return Redirect("/SuccessWebPay");
             //return View("SuccessView");
         }
@@ -238,7 +250,7 @@ namespace tiendaAPI_MVC.Controllers
             return this.payment.Execute(apiContext, paymentExecution);
         }
 
-        private Payment CreatePayment(APIContext apiContext, string redirectUrl)
+        private Payment CreatePayment(APIContext apiContext, string redirectUrl, decimal dollar = 0, long numDocumento = 0)
         {
 
             //similar to credit card create itemlist and add item objects to it
@@ -247,28 +259,27 @@ namespace tiendaAPI_MVC.Controllers
             //Obteneiendio los productos delk carrito de compra y agregandolos a la lista de compra de Paypal
             Dictionary<string, ItemCarrito> carrito = (Dictionary<string, ItemCarrito>)Session["carrito"];
             decimal total = 0;
-            decimal dollar = 800;
             decimal impuestos = 0;
             decimal gastosEnvio = 1;
-            long numFactura = 3;
+            long numFactura = numDocumento;
             NumberFormatInfo nfi = new NumberFormatInfo();
             nfi.NumberDecimalSeparator = ".";
 
             System.IFormatProvider cultureUS = new System.Globalization.CultureInfo("en-US");
 
 
-            foreach (var item  in carrito)
+            foreach (var item in carrito)
             {
                 itemList.items.Add(new Item() {
                     name = item.Value.producto.Nombre,
-                    currency = "USD",   
-                    price = (item.Value.producto.Precio / dollar).ToString(nfi),
+                    currency = "USD",
+                    price = Math.Round(item.Value.producto.Precio / dollar, 2).ToString(nfi),
                     quantity = item.Value.cantidad.ToString(),
-                    sku = "sku"                    
+                    sku = "sku"
                 });
-                total += (item.Value.producto.Precio / dollar) * item.Value.cantidad;
+                total += Math.Round((item.Value.producto.Precio / dollar) * item.Value.cantidad, 2);
             }
-            
+
 
             var payer = new Payer() { payment_method = "paypal" };
 
@@ -286,7 +297,7 @@ namespace tiendaAPI_MVC.Controllers
                 shipping = gastosEnvio.ToString(nfi), //Gastos de envío
                 subtotal = total.ToString(nfi)
             };
-            string strTotal = (total + impuestos + gastosEnvio).ToString(nfi);
+            string strTotal = Math.Round(total + impuestos + gastosEnvio, 2).ToString(nfi);
             // similar as we did for credit card, do here and create amount object
             var amount = new Amount()
             {
@@ -315,6 +326,54 @@ namespace tiendaAPI_MVC.Controllers
 
             // Create a payment using a APIContext
             return this.payment.Create(apiContext);
+        }
+
+        //Obtiene el valor del dollar al día 
+        private async Task<decimal> GetDollar()
+        {
+            decimal dollar = 0;
+            try
+            {
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync("https://mindicador.cl/api"); //Consultando los indicadores económicos
+                if (response.IsSuccessStatusCode)
+                {
+                    var indicador = await response.Content.ReadAsAsync<Object>();   //Recuperando la información
+                    var obj = JObject.Parse(indicador.ToString());  //Convirtiendo a Objeto
+                    dollar = decimal.Parse(obj.GetValue("dolar")["valor"].ToString());  //Recuperando el valor del dollar
+                }
+            }catch(Exception ex){
+                dollar = -1;    //En caso de error se devolvera -!
+            }
+            return dollar;
+        }
+
+        //Obtiene el último número correlativo de boleta
+        private async Task<long> GetNumDocumento()
+        {
+            long numDocumento = 3;
+            try
+            {
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync("http://localhost:1612/api/LastWebPayTransaction");
+                if(response.IsSuccessStatusCode)
+                {
+                    WebPayTransaction wpt = JsonConvert.DeserializeObject<WebPayTransaction>(response.ToString());
+                    if(wpt != null)
+                        numDocumento = wpt.Id;
+                }
+            }
+            catch(Exception ex)
+            {
+                numDocumento = -1;
+            }
+            return numDocumento;
+        }
+
+
+        private void RegistrarVenta()
+        {
+
         }
     }
 }

@@ -189,6 +189,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\WebPayTransactionsController.cs" />
     <Compile Include="DAL\TiendaContext.cs" />
     <Compile Include="DAL\TiendaInitializer.cs" />
     <Compile Include="Global.asax.cs">
