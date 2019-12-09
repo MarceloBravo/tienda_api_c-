@@ -24,11 +24,13 @@ namespace api_tienda.Controllers
             try
             {
                 user = db.Usuarios.FirstOrDefault(u => u.Nickname.Equals(loginData.nicknameOrEmail) || u.Email.Equals(loginData.nicknameOrEmail));
-
+                
                 if(user == null)
                     return BadRequest("Usuario no existente.");
 
-                if(Crypto.VerifyHashedPassword(user.Password, loginData.password))
+                user.Ciudad = db.Ciudades.Find(user.IdCiudad);
+
+                if (Crypto.VerifyHashedPassword(user.Password, loginData.password))
                     return Ok(user);
 
                 throw new System.ApplicationException("Contraseña incorrecta.");

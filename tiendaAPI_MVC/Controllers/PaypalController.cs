@@ -231,7 +231,8 @@ namespace tiendaAPI_MVC.Controllers
                     }
                     else
                     {
-                        RegistrarVenta(executedPayment);
+                        if (await RegistrarVenta(executedPayment))
+                            Session["numFactura"] = executedPayment.transactions[0].invoice_number;
                     }
 
                 }
