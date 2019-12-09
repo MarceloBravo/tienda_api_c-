@@ -45,8 +45,13 @@ namespace api_tienda.Models
         public string Token { set; get; }
 
         public DateTime Created_at { set; get; }
-        public DateTime Updated_at { set => Updated_at = DateTime.Today; get => Updated_at; }
+        public DateTime Updated_at { set; get; }
         public DateTime? Deleted_at { set; get; }
+
+        public WebPayTransaction()
+        {
+            this.Updated_at = DateTime.Today;
+        }
     }
     /*
     class WebPayTransactionDbContext: DbContext

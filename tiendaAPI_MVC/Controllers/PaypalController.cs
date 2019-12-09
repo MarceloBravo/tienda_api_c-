@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using tiendaAPI_MVC.Models;
@@ -188,7 +189,7 @@ namespace tiendaAPI_MVC.Controllers
                     {
                         throw new System.ArgumentException("Ocurrió un error al intemntar obtener el numero del documento a emitir.");
                     }
-                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, dollar, (numDocumento+1));
+                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, dollar, numDocumento);
 
                     //get links returned from paypal in response to Create function call
 
@@ -210,7 +211,6 @@ namespace tiendaAPI_MVC.Controllers
                     // saving the paymentID in the key guid
                     Session.Add(guid, createdPayment.id);
 
-
                     return Redirect(paypalRedirectUrl);
                 }
                 else
@@ -229,6 +229,11 @@ namespace tiendaAPI_MVC.Controllers
                     {
                         return View("FailureView");
                     }
+                    else
+                    {
+                        RegistrarVenta(executedPayment);
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -237,7 +242,7 @@ namespace tiendaAPI_MVC.Controllers
                 return View("FailureView");
             }
 
-            RegistrarVenta();
+            
 
             return Redirect("/SuccessWebPay");
             //return View("SuccessView");
@@ -351,17 +356,23 @@ namespace tiendaAPI_MVC.Controllers
         //Obtiene el último número correlativo de boleta
         private async Task<long> GetNumDocumento()
         {
-            long numDocumento = 3;
+            long numDocumento = 15;
             try
             {
                 HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync("http://localhost:1612/api/LastWebPayTransaction");
-                if(response.IsSuccessStatusCode)
+                var json = await client.GetStringAsync("http://localhost:1612/api/LatsWebPayTransaction");
+                WebPayTransaction transaccion = JsonConvert.DeserializeObject<WebPayTransaction>(json);
+                if(transaccion != null)
+                    numDocumento = long.Parse(transaccion.IdOrden.ToString()) + 1;
+
+                //HttpResponseMessage response = await client.GetAsync("http://localhost:1612/api/LatsWebPayTransaction");
+                /*if (response.IsSuccessStatusCode)
                 {
                     WebPayTransaction wpt = JsonConvert.DeserializeObject<WebPayTransaction>(response.ToString());
                     if(wpt != null)
-                        numDocumento = wpt.Id;
+                        numDocumento = long.Parse(wpt.IdOrden.ToString()) + 1;
                 }
+                */
             }
             catch(Exception ex)
             {
@@ -371,9 +382,43 @@ namespace tiendaAPI_MVC.Controllers
         }
 
 
-        private void RegistrarVenta()
+        private async Task<Boolean> RegistrarVenta(Payment payment)
         {
+            Boolean resp = false;
+            try
+            {
+                WebPayTransaction wpt = new WebPayTransaction();
+                wpt.IdOrden = long.Parse(payment.transactions[0].invoice_number);
+                wpt.Orden = null;
+                wpt.AccountingDate = DateTime.Now.Millisecond;
+                wpt.BuyOrder = payment.transactions[0].invoice_number;
+                wpt.CardNumber = null;
+                wpt.CardExpirationDate = null;
+                wpt.AuthorizationCode = 0;
+                wpt.PaymentTypeCode = payment.payer.payment_method;
+                wpt.ResponseCode = 0;
+                wpt.SharedNumber = 0;
+                wpt.Ammount = decimal.Parse(payment.transactions[0].amount.total.ToString());
+                wpt.CommerceCode = payment.transactions[0].payee.merchant_id;
+                wpt.TransactionDate = payment.create_time;
+                wpt.VCI = "";
+                wpt.Token = payment.token;
+                wpt.Created_at = DateTime.Today;
+                wpt.Updated_at = DateTime.Today;
+                
+                
+                var json = JsonConvert.SerializeObject(wpt);
+                var stringContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
 
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.PostAsync("http://localhost:1612/api/WebPayTransactions", stringContent); //Consultando los indicadores económicos
+                resp = response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                resp = false;
+            }
+            return resp;
         }
     }
 }

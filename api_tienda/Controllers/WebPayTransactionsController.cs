@@ -22,11 +22,12 @@ namespace api_tienda.Controllers
         {
             return db.WebPayTransactions;
         }
-
-        // GET: api/LastWebPayTransaction
+        
+        [Route("api/LatsWebPayTransaction")]
+        [ResponseType(typeof(WebPayTransaction))]
         public IHttpActionResult GetLastWebPayTransaction()
         {
-            WebPayTransaction webPayTransaction = db.WebPayTransactions.LastOrDefault();
+            WebPayTransaction webPayTransaction = db.WebPayTransactions.OrderByDescending(p => p.Id).First();
             if (webPayTransaction == null)
             {
                 return NotFound();
