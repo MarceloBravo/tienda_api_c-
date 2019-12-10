@@ -29,7 +29,7 @@ namespace tiendaAPI_MVC.Controllers
             string usuario, destinatario, mensaje, asunto, contrasena;
             
             Usuario usuarioSession = (Usuario)Session["USUARIO"];
-            usuario = "mabc@live.cl";   //Correo electrónico Live
+            usuario = "xxx@live.cl";   //Correo electrónico Live
             destinatario = usuarioSession.Email;
             asunto = "Comprobante de venta";
 
@@ -44,7 +44,7 @@ namespace tiendaAPI_MVC.Controllers
             mensaje += "    </body>";
             mensaje += "</html>";
 
-            contrasena = "olecram6791"; //Contraseña correo Live
+            contrasena = ""; //Contraseña correo Live
 
             MailMessage correo = new MailMessage(usuario, destinatario, asunto, mensaje);
             correo.IsBodyHtml = true;   //Especifica que el mensaje que se está enviando corresponde a codigo HTML y debe ser interpretado como tal
