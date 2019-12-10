@@ -6,3 +6,13 @@
 .x_title > h2 {
     margin-top: 10px !important;
 }
+
+.div-buttons {
+    padding-top: 20px;
+}
+
+.btn{
+    font-size: inherit !important;
+}
+
+

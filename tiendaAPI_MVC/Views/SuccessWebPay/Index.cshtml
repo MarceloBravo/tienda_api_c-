@@ -80,7 +80,7 @@
                                     <b>Boleta @ViewBag.NumFactura</b>
                                     <br>
                                     <b>Fecha de pago:</b> @DateTime.Now.ToString("M/dd/yyyy")
-                                    
+
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -123,10 +123,8 @@
                             <!-- /.row -->
                             <div class="row">
                                 <!-- accepted payments column -->
-                                <div class="col-xs-6">                                    
-                                    <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                                        Su compra ha sido completada exitosamente. Para finalizar seleccione <spam><a href="#">Imprimir</a></spam> o <spam><a href="#">Enviarme comprobante por email</a></spam> para obtener el comprobante de ésta transacción.
-                                    </p>
+                                <div class="col-xs-6">
+
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-xs-6">
@@ -156,14 +154,22 @@
                                 <!-- /.col -->
                             </div>
                             <!-- /.row -->
-                            <!-- this row will not appear when printing -->
-                            <div class="row no-print">
-                                <div class="col-xs-12">
-                                    <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Imprimir</button>
-                                    <button id="sendEmail" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i>Enviarme el comprobante por email</button>
-                                </div>
-                            </div>
+
                         </section>
+                    </div>
+                    <!-- this row will not appear when printing -->
+                    <div class="row no-print">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5">
+                            <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                                Su compra ha sido completada exitosamente. Para finalizar seleccione <spam><a href="#">Imprimir</a></spam> o <spam><a href="#">Enviarme comprobante por email</a></spam> para obtener el comprobante de ésta transacción.
+                            </p>
+                        </div>
+                        <div class="col-xs-5 div-buttons">
+                            <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Imprimir</button>
+                            <button id="sendEmail" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i>Enviarme el comprobante por email</button>
+                        </div>
+                        <div class="col-md-1"></div>
                     </div>
 
                 </div>

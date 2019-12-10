@@ -100,9 +100,21 @@ namespace tiendaAPI_MVC.Controllers
         [HttpGet]
         public ActionResult VaciarCarrito()
         {
-            carrito.Clear();
-            Session["carrito"] = carrito;
+            VaciarCarro();
             return RedirectToAction( "Index",new { carrito = carrito });
+        }
+
+        public Boolean VaciarCarro()
+        {
+            try
+            {
+                carrito.Clear();
+                Session["carrito"] = carrito;
+                return true;
+            }catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

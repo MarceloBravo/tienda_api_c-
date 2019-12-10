@@ -10,12 +10,14 @@ var email = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(documento)
-        })
-            .then(function (data) {
-                console.log(data)
+        }).then(resp => resp.json())
+            .then(function (data) {                
+                alert(data.mensaje);
+                window.location = "/";
             })
-        .catch(function (error) {
-            console.log(error)
+            .catch(function (error) {
+                alert(error);
+                console.log(error)
         });
 
     }
