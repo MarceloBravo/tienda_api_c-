@@ -9,9 +9,6 @@ function agregarProducto(id, cantidad)
         .then(resp => resp.json())
         .then(function (data) {
             console.log(data)
-            //if (response.ok) {
-            //    console.log(data);
-            //}           
             
             document.getElementById("cantidad-" + id).value = data[id].cantidad;
             document.getElementById("precio-" + id).innerHTML = "$" + (data[id].producto.Precio * data[id].cantidad).toLocaleString();

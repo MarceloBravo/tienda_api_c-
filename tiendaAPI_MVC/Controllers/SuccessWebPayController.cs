@@ -23,16 +23,16 @@ namespace tiendaAPI_MVC.Controllers
         
 
         //Envío de comprobante de venta por correo
-        [HttpGet]
-        public ActionResult EnviarCorreoVenta()
+        [HttpPost]
+        public ActionResult EnviarCorreoVenta(string comprobante)
         {
-            string usuario, destinatario, asunto, mensaje, contrasena;
+            string usuario, destinatario, mensaje, asunto, contrasena;
             Usuario usuarioSession = (Usuario)Session["USUARIO"];
-            usuario = "mabc@live.cl";   //Correo electrónico Live
+            usuario = "xxx@live.cl";   //Correo electrónico Live
             destinatario = usuarioSession.Email;
             asunto = "Comprobante de venta";
-            mensaje = "Venta exitosa";  
-            contrasena = "olecram6791"; //Contraseña correo Live
+            mensaje = comprobante;  
+            contrasena = ""; //Contraseña correo Live
 
             MailMessage correo = new MailMessage(usuario, destinatario, asunto, mensaje);
             SmtpClient client = new SmtpClient("smtp.live.com");    //Cliente Smtp live (Utiliza correo live para el envio de emails)
@@ -52,7 +52,6 @@ namespace tiendaAPI_MVC.Controllers
 
             return Redirect("/");
         }
-    }
 
-   
+    }
 }

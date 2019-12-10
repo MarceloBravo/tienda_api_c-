@@ -40,7 +40,7 @@
                         <div class="clearfix"></div>
                     </div>
 
-                    <div class="x_content">
+                    <div class="x_content" id="comprobanteVenta">
                         <section class="content invoice">
                             <!-- title row -->
                             <div class="row">
@@ -160,7 +160,7 @@
                             <div class="row no-print">
                                 <div class="col-xs-12">
                                     <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Imprimir</button>
-                                    <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> <a href="http://localhost:4529/SuccessWebPay/EnviarCorreoVenta">Enviarme el comprobante por email</a></button>
+                                    <button id="sendEmail" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i>Enviarme el comprobante por email</button>
                                 </div>
                             </div>
                         </section>
@@ -183,3 +183,4 @@
 @Scripts.Render("~/Scripts/js/jquery.magnific-popup.min.js")
 @Scripts.Render("~/Scripts/js/owl.carousel.min.js")
 @Scripts.Render("~/Scripts/js/main.js")  
+@Scripts.Render("~/Scripts/tienda/comprobanteWebPay.js")  

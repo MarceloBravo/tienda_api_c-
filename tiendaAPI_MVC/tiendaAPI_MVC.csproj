@@ -509,6 +509,7 @@
     <Content Include="Scripts\js\vendor\jquery-2.2.4.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\tienda\carrito.js" />
+    <Content Include="Scripts\tienda\comprobanteWebPay.js" />
     <Content Include="Scripts\tienda\layout.js" />
     <Content Include="Scripts\tienda\login.js" />
     <Content Include="Scripts\tienda\tienda.js" />
