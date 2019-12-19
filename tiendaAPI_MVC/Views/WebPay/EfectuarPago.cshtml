@@ -1,0 +1,13 @@
+﻿@Styles.Render("~/Content/css/nice-select.css")
+@Styles.Render("~/Content/css/ion.rangeSlider.css")
+@Styles.Render("~/Content/css/ion.rangeSlider.skinFlat.css")
+@Styles.Render("~/Content/css/bootstrap.css")
+@Styles.Render("~/Content/css/main.css")
+@Styles.Render("~/Content/css/custom/carrito.css")
+@Styles.Render("~/Content/css/custom/pago-compra.css")
+
+<form id="form" action="@ViewBag.formAction">
+    <input type="hidden" id="token_ws" name="token_ws" value="@ViewBag.token" />
+</form>
+
+@Scripts.Render("~/Scripts/tienda/efectuarPago.js");

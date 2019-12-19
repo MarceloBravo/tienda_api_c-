@@ -27,6 +27,7 @@ namespace tiendaAPI_MVC.Controllers
     public class PaypalController : Controller
     {
         private PayPal.Api.Payment payment;
+        private decimal gastosEnvio = 1;
 
         public ActionResult PaymentWithCreditCard()
         {
@@ -184,12 +185,8 @@ namespace tiendaAPI_MVC.Controllers
                     {
                         throw new System.ArgumentException("Ocurrió un error al intemntar obtener el valor del dollar.");
                     }
-                    long numDocumento = await GetNumDocumento();
-                    if (numDocumento == -1)
-                    {
-                        throw new System.ArgumentException("Ocurrió un error al intemntar obtener el numero del documento a emitir.");
-                    }
-                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, dollar, numDocumento);
+                    //long numDocumento = await GetNumDocumento();                    
+                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, dollar);
 
                     //get links returned from paypal in response to Create function call
 
@@ -231,8 +228,23 @@ namespace tiendaAPI_MVC.Controllers
                     }
                     else
                     {
+                        long numDocumento = await Util.GenerarNuevoNumeroBoleta();
+                        if (numDocumento == -1)
+                        {
+                            throw new System.ArgumentException("Ocurrió un error al intentar obtener el numero del documento a emitir.");
+                        }
+
                         if (await RegistrarVenta(executedPayment))
-                            Session["numFactura"] = executedPayment.transactions[0].invoice_number;
+                        {
+                            Session["shipping"] = gastosEnvio;
+                            Session["ordenDeCompra"] = executedPayment.transactions[0].invoice_number;
+                            Session["numFactura"] = numDocumento;
+                            //Session["numFactura"] = executedPayment.transactions[0].invoice_number;
+                        }
+                        else
+                        {
+                            throw new System.ArgumentException("Ocurrió un error al intentar registrar la venta.");
+                        }
                     }
 
                 }
@@ -246,7 +258,6 @@ namespace tiendaAPI_MVC.Controllers
             
 
             return Redirect("/SuccessWebPay");
-            //return View("SuccessView");
         }
 
         private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
@@ -256,7 +267,7 @@ namespace tiendaAPI_MVC.Controllers
             return this.payment.Execute(apiContext, paymentExecution);
         }
 
-        private Payment CreatePayment(APIContext apiContext, string redirectUrl, decimal dollar = 0, long numDocumento = 0)
+        private Payment CreatePayment(APIContext apiContext, string redirectUrl, decimal dollar = 0)
         {
 
             //similar to credit card create itemlist and add item objects to it
@@ -266,8 +277,8 @@ namespace tiendaAPI_MVC.Controllers
             Dictionary<string, ItemCarrito> carrito = (Dictionary<string, ItemCarrito>)Session["carrito"];
             decimal total = 0;
             decimal impuestos = 0;
-            decimal gastosEnvio = 1;
-            long numFactura = numDocumento;
+            
+            //long numFactura = numDocumento;
             NumberFormatInfo nfi = new NumberFormatInfo();
             nfi.NumberDecimalSeparator = ".";
 
@@ -317,7 +328,7 @@ namespace tiendaAPI_MVC.Controllers
             transactionList.Add(new Transaction()
             {
                 description = "Venta de productos tienda C#.",
-                invoice_number = numFactura.ToString(),
+                invoice_number = new Random().Next(100000, 999999999).ToString(),   //Número de orden de compra
                 amount = amount,
                 item_list = itemList
             });
@@ -353,7 +364,7 @@ namespace tiendaAPI_MVC.Controllers
             }
             return dollar;
         }
-
+        /*
         //Obtiene el último número correlativo de boleta
         private async Task<long> GetNumDocumento()
         {
@@ -367,13 +378,13 @@ namespace tiendaAPI_MVC.Controllers
                     numDocumento = long.Parse(transaccion.IdOrden.ToString()) + 1;
 
                 //HttpResponseMessage response = await client.GetAsync("http://localhost:1612/api/LatsWebPayTransaction");
-                /*if (response.IsSuccessStatusCode)
-                {
-                    WebPayTransaction wpt = JsonConvert.DeserializeObject<WebPayTransaction>(response.ToString());
-                    if(wpt != null)
-                        numDocumento = long.Parse(wpt.IdOrden.ToString()) + 1;
-                }
-                */
+                if (response.IsSuccessStatusCode)
+                //{
+                //    WebPayTransaction wpt = JsonConvert.DeserializeObject<WebPayTransaction>(response.ToString());
+                //    if(wpt != null)
+                //        numDocumento = long.Parse(wpt.IdOrden.ToString()) + 1;
+                //}
+                
             }
             catch(Exception ex)
             {
@@ -381,7 +392,7 @@ namespace tiendaAPI_MVC.Controllers
             }
             return numDocumento;
         }
-
+    */
 
         private async Task<Boolean> RegistrarVenta(Payment payment)
         {

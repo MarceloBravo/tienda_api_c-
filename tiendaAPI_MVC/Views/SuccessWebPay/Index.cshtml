@@ -77,7 +77,9 @@
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
-                                    <b>Boleta @ViewBag.NumFactura</b>
+                                    <b>Boleta N°@ViewBag.numFactura</b>
+                                    <br>
+                                    <b>Orden de compra N°@ViewBag.buyOrder</b>
                                     <br>
                                     <b>Fecha de pago:</b> @DateTime.Now.ToString("M/dd/yyyy")
 
@@ -102,7 +104,7 @@
 
                                             @{
                                                 decimal subTotal = 0;
-                                                foreach (System.Collections.Generic.KeyValuePair<string, ItemCarrito> item in Model)
+                                                foreach (System.Collections.Generic.KeyValuePair<string, ItemCarrito> item in ViewBag.carrito)
                                                 {
                                                     subTotal = item.Value.cantidad * item.Value.producto.Precio;
                                                     total += subTotal;
@@ -110,8 +112,8 @@
                                                         <td>@item.Value.producto.Nombre</td>
                                                         <td>@item.Value.producto.Descripcion</td>
                                                         <td>@item.Value.cantidad</td>
-                                                        <td>@item.Value.producto.Precio</td>
-                                                        <td>$@subTotal.ToString("###.###.###")</td>
+                                                        <td>$@item.Value.producto.Precio.ToString("###.###.###")</td>
+                                                        <td>$@subTotal.ToString("#.###.###.###")</td>
                                                     </tr>
                                                 }
                                             }
@@ -138,12 +140,12 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Envío:</th>
-                                                    <td>$1</td>
+                                                    <td>$@ViewBag.shipping</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Total:</th>
                                                     @{
-                                                        total += 1;
+                                                        total += ViewBag.shipping;
                                                         <td>$@total.ToString("###.###.###.###")</td>
                                                     }
                                                 </tr>

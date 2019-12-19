@@ -110,6 +110,11 @@ namespace tiendaAPI_MVC.Controllers
             {
                 carrito.Clear();
                 Session["carrito"] = carrito;
+                Session["numFactura"] = null;
+                Session["ordenDeCompra"] = null;
+                Session["shipping"] = null;
+                Session["ordenDeCompra"] = null;
+                Session["carrito"] = null;
                 return true;
             }catch(Exception ex)
             {

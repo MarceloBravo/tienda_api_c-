@@ -15,10 +15,26 @@ namespace tiendaAPI_MVC.Controllers
         private static Dictionary<string, ItemCarrito> carrito = new Dictionary<string, ItemCarrito>();
         public ActionResult Index()
         {
+            //Asignando a las variables los datos para mostrarlos en la boleta
             ViewBag.usuario = (Usuario)Session["USUARIO"];
-            ViewBag.NumFactura = Session["numFactura"];
-            carrito = (Dictionary<string, ItemCarrito>)Session["carrito"];
-            return View(carrito);
+            ViewBag.numFactura = Session["numFactura"];
+            ViewBag.ordenDeCompra = Session["ordenDeCompra"];
+            ViewBag.shipping = Session["shipping"];
+            ViewBag.buyOrder = Session["ordenDeCompra"];            
+            ViewBag.carrito = (Dictionary<string, ItemCarrito>)Session["carrito"];
+
+            carrito = (Dictionary<string, ItemCarrito>)Session["carrito"];           
+            ViewBag.carrito = carrito.ToDictionary(item => item.Key, item => item.Value);   //Copiando el contenido del carrito de compras
+            carrito.Clear();    //vaciando el carrito
+            
+            //Reseteando las variables de sessión de los datos de la compra
+            Session["numFactura"] = null;
+            Session["ordenDeCompra"] = null;
+            Session["shipping"] = null;
+            Session["ordenDeCompra"] = null;
+            Session["carrito"] = carrito;   
+
+            return View();
         }
         
 
