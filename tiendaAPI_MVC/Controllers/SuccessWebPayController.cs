@@ -32,7 +32,7 @@ namespace tiendaAPI_MVC.Controllers
             Session["ordenDeCompra"] = null;
             Session["shipping"] = null;
             Session["ordenDeCompra"] = null;
-            Session["carrito"] = carrito;   
+            Session["carrito"] = carrito;
 
             return View();
         }

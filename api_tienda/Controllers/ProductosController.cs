@@ -61,7 +61,7 @@ namespace api_tienda.Controllers
                 return NotFound();
             }
 
-            return Ok(producto);
+            return Json(producto);
         }
 
         // PUT: api/Productoes/5

@@ -1,7 +1,6 @@
-﻿onload = function () {
-    document.getElementById("btnCerrarAlertaModal").onclick = modal.cerrar; 
-    document.getElementById("cerrarAlertaModal").onclick = modal.cerrar; 
-}
+﻿//onload = function () {
+    
+//}
 
 function agregarProducto(id, cantidad)
 {

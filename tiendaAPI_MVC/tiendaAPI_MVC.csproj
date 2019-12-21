@@ -228,6 +228,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaypalController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\SuccessWebPayController.cs" />
     <Compile Include="Controllers\Util.cs" />
     <Compile Include="Controllers\WebPayController.cs" />
@@ -545,6 +546,7 @@
     <Content Include="Scripts\tienda\carrito.js" />
     <Content Include="Scripts\tienda\comprobanteWebPay.js" />
     <Content Include="Scripts\tienda\efectuarPago.js" />
+    <Content Include="Scripts\tienda\home.js" />
     <Content Include="Scripts\tienda\layout.js" />
     <Content Include="Scripts\tienda\login.js" />
     <Content Include="Scripts\tienda\tienda.js" />
@@ -575,6 +577,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Producto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

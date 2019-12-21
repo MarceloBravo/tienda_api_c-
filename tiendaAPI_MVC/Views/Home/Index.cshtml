@@ -140,17 +140,18 @@
                                     if (imgs.Count > 0)
                                     {
                                         ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
-                                        <img class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+                                        <img id="img-@img.Id" class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+
+                                        <div class="content-details fadeIn-bottom">
+                                            <div class="bottom d-flex align-items-center justify-content-center">
+                                                <!-- <a href="#"><span class="lnr lnr-heart"></span></a> -->
+                                                <!-- <a href="#"><span class="lnr lnr-layers"></span></a> -->
+                                                <a onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
+                                                <a onclick="preView(@img.Id, @producto.Id)"><span class="lnr lnr-frame-expand"></span></a>
+                                            </div>
+                                        </div>
                                     }
                                 }
-                                <div class="content-details fadeIn-bottom">
-                                    <div class="bottom d-flex align-items-center justify-content-center">
-                                        <!-- <a href="#"><span class="lnr lnr-heart"></span></a> -->
-                                        <!-- <a href="#"><span class="lnr lnr-layers"></span></a> -->
-                                        <a onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-                                    </div>
-                                </div>
                             </div>
                             <div class="price">
                                 @{
@@ -188,17 +189,19 @@
                                     if (imgs.Count > 0)
                                     {
                                         ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
-                                        <img class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+                                        <img id="img-@img.Id" class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+
+
+                                        <div class="content-details fadeIn-bottom">
+                                            <div class="bottom d-flex align-items-center justify-content-center">
+                                                <!-- <a href="#"><span class="lnr lnr-heart"></span></a> -->
+                                                <!-- <a href="#"><span class="lnr lnr-layers"></span></a> -->
+                                                <a onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
+                                                <a onclick="preView(@img.Id, @producto.Id)"><span class="lnr lnr-frame-expand"></span></a>
+                                            </div>
+                                        </div>
+                                        }
                                     }
-                                }
-                                <div class="content-details fadeIn-bottom">
-                                    <div class="bottom d-flex align-items-center justify-content-center">
-                                        <!-- <a href="#"><span class="lnr lnr-heart"></span></a> -->
-                                        <!-- <a href="#"><span class="lnr lnr-layers"></span></a> -->
-                                        <a onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-                                    </div>
-                                </div>
                             </div>
                             <div class="price">
                                 <h5>@producto.Nombre</h5>
@@ -234,17 +237,18 @@
                                     if (imgs.Count > 0)
                                     {
                                         ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
-                                        <img class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+                                        <img id="img-@img.Id" class="content-image img-fluid d-block mx-auto" src="@Url.Content(img.Ubicacion)" alt="">
+
+                                        <div class="content-details fadeIn-bottom">
+                                            <div class="bottom d-flex align-items-center justify-content-center">
+                                                <!-- <a href="#"><span class="lnr lnr-heart"></span></a> -->
+                                                <!-- <a href="#"><span class="lnr lnr-layers"></span></a> -->
+                                                <a onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
+                                                <a onclick="preView(@img.Id, @producto.Id)"><span class="lnr lnr-frame-expand"></span></a>
+                                            </div>
+                                        </div>
                                     }
                                 }
-                                <div class="content-details fadeIn-bottom">
-                                    <div class="bottom d-flex align-items-center justify-content-center">
-                                        <!-- <a href="#"><span class="lnr lnr-heart"></span></a> -->
-                                        <!-- <a href="#"><span class="lnr lnr-layers"></span></a> -->
-                                        <a onclick="agregarProducto(@producto.Id,1)"><span class="lnr lnr-cart"></span></a>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-                                    </div>
-                                </div>
                             </div>
                             <div class="price">
                                 <h5>@producto.Nombre</h5>
@@ -319,7 +323,8 @@
                                     if (imgs.Count > 0)
                                     {
                                         ImagenesProducto img = imgs.Where(s => s.predeterminada == true).FirstOrDefault();
-                                        <a href="#"><img src="@Url.Content(img.Ubicacion)" alt=""></a>
+                                        <a id="img-@img.Id" href="#"><img src="@Url.Content(img.Ubicacion)" alt=""></a>
+                                        
                                         <div class="desc">
                                             <a href="#" class="title">producto.Nombre</a>
                                             <div class="price"><span class="lnr lnr-tag"></span> $ @orden.Producto.Precio</div>
@@ -358,6 +363,42 @@
     </section>
     <!-- End brand Area -->
 
+    <div id="preview-item" class="preview-item">
+        <div class="form-group">
+            <div class="img-preview col-md-6">
+                <img id="img-preview" class="content-image img-fluid d-block mx-auto" src="#" alt="">
+            </div>
+            <div class="descrition-container col-md-6">
+                <h2 id="marca-item"></h2>
+                <h3 id="nombre-item"></h3>
+                <div id="descripcion-item"></div>
+                <div id="color-item"></div>
+                <br />
+                <div class="fotm-group row">
+                    <h3 class="col-md-5">Precio Anterior</h3>
+                    <h3 class="col-md-3" id="precio-anterior-item"></h3>
+                </div>
+                <br />
+                <div class="fotm-group row">
+                    <h3 class="col-md-5">Precio Actual</h3>
+                    <h3 class="col-md-3" id="precio-actual-item"></h3>
+                </div>
+                <br />
+                <div class="fotm-group row">
+                    <div class="col-md-4">
+                        <button id="btnAgregarProducto" class="btn btn-primary">Agregar al carrito  <span class="lnr lnr-cart"></span></button>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <button id="btnCerrarModal" class="btn btn-danger">Cerrar <span class="lnr lnr-cross"></span></button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     @Html.Partial("~/Views/Shared/_PartialAlertModal.cshtml")
 
     @Scripts.Render("~/Scripts/js/vendor/jquery-2.2.4.min.js")
@@ -372,6 +413,8 @@
     @Scripts.Render("~/Scripts/js/main.js")
 
     @Scripts.Render("~/Scripts/tienda/tienda.js")
+    
+    @Scripts.Render("~/Scripts/tienda/home.js")
 
 </body>
 </html>
