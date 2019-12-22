@@ -27,7 +27,7 @@ namespace api_tienda.DAL
         public DbSet<Usuario> Usuarios { set; get; }
         public DbSet<Orden> Ordenes { set; get; }
         public DbSet<DetalleOrden> DetalleOrdenes { set; get; }
-        public DbSet<WebPayTransaction> WebPayTransactions { set; get; }
+        public DbSet<Transaction> WebPayTransactions { set; get; }
         public DbSet<WebPayError> WebPayErrors { set; get; }
         public DbSet<Oferta> Ofertas { set; get; }
 

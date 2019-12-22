@@ -7,7 +7,7 @@ using System.Web;
 
 namespace api_tienda.Models
 {
-    public class WebPayTransaction
+    public class Transaction
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { set; get; }
@@ -48,7 +48,7 @@ namespace api_tienda.Models
         public DateTime Updated_at { set; get; }
         public DateTime? Deleted_at { set; get; }
 
-        public WebPayTransaction()
+        public Transaction()
         {
             this.Updated_at = DateTime.Today;
         }
