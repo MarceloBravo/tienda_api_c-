@@ -13,11 +13,11 @@ using api_tienda.Models;
 
 namespace api_tienda.Controllers
 {
-    public class WebPayTransactionsController : ApiController
+    public class TransactionsController : ApiController
     {
         private TiendaContext db = new TiendaContext();
 
-        // GET: api/WebPayTransactions
+        // GET: api/Transactions
         public IQueryable<Transaction> GetWebPayTransactions()
         {
             return db.WebPayTransactions;
@@ -27,15 +27,23 @@ namespace api_tienda.Controllers
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult GetLastWebPayTransaction()
         {
-            Transaction webPayTransaction = db.WebPayTransactions.OrderByDescending(p => p.Id).First();
-            if (webPayTransaction == null)
+            try
+            {
+                Transaction webPayTransaction = db.WebPayTransactions.OrderByDescending(p => p.Id).First();
+                if (webPayTransaction == null)
+                {
+                    return NotFound();
+                }
+                return Ok(webPayTransaction);
+            }
+            catch(Exception ex)
             {
                 return NotFound();
             }
-            return Ok(webPayTransaction);
+            
         }
 
-        // GET: api/WebPayTransactions/5
+        // GET: api/Transactions/5
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult GetWebPayTransaction(long id)
         {
@@ -48,7 +56,7 @@ namespace api_tienda.Controllers
             return Ok(webPayTransaction);
         }
 
-        // PUT: api/WebPayTransactions/5
+        // PUT: api/Transactions/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutWebPayTransaction(long id, Transaction webPayTransaction)
         {
@@ -83,7 +91,7 @@ namespace api_tienda.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/WebPayTransactions
+        // POST: api/Transactions
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult PostWebPayTransaction(Transaction webPayTransaction)
         {
@@ -98,7 +106,7 @@ namespace api_tienda.Controllers
             return CreatedAtRoute("DefaultApi", new { id = webPayTransaction.Id }, webPayTransaction);
         }
 
-        // DELETE: api/WebPayTransactions/5
+        // DELETE: api/Transactions/5
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult DeleteWebPayTransaction(long id)
         {

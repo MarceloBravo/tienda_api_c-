@@ -189,7 +189,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
-    <Compile Include="Controllers\WebPayTransactionsController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="DAL\TiendaContext.cs" />
     <Compile Include="DAL\TiendaInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -213,7 +213,7 @@
     <Compile Include="Models\TallasProducto.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\WebPayError.cs" />
-    <Compile Include="Models\WebPayTransaction.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

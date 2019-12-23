@@ -15,8 +15,6 @@ namespace tiendaAPI_MVC.Controllers
         private static Dictionary<string, ItemCarrito> carrito = new Dictionary<string, ItemCarrito>();
         public ActionResult Index()
         {
-            RegistrarVenta();
-
             //Asignando a las variables los datos para mostrarlos en la boleta
             ViewBag.usuario = (Usuario)Session["USUARIO"];
             ViewBag.numFactura = Session["numFactura"];
@@ -89,20 +87,6 @@ namespace tiendaAPI_MVC.Controllers
 
             return Json(new { mensaje = "El correo de finalización de compra ha sido enviado exitosamente" });
         }
-
-
-        public Boolean RegistrarVenta()
-        {
-            Boolean resp = false;
-            try
-            {
-
-            }catch(Exception ex)
-            {
-
-            }
-            return resp;
-        }
-
+        
     }
 }

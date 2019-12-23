@@ -1,9 +1,11 @@
 ﻿using api_tienda.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -18,11 +20,15 @@ namespace tiendaAPI_MVC.Controllers
         private static string buyOrder;
         private static Usuario usuario;
         private static Dictionary<string, ItemCarrito> carrito;
+        private string endPoint = "http://localhost:1612/api/";
+        private static Webpay transaction;
+        private static decimal ammount;
+        private static Configuration configuration;
 
-        public ActionResult EfectuarPago()
+        public async Task<ActionResult> EfectuarPago()
         {
             gastosEnvio = 0;
-            decimal amount = total() + gastosEnvio;
+            ammount = total() + gastosEnvio;
             buyOrder = new Random().Next(100000, 999999999).ToString();
             string sessionId = "";
             string returnUrl = Request.Url.Scheme + "://" + Request.Url.Authority + "/WebPay/ReturnUrl";
@@ -35,18 +41,19 @@ namespace tiendaAPI_MVC.Controllers
 
             try
             {
-                var configuration = Configuration.ForTestingWebpayPlusNormal();
+                configuration = Configuration.ForTestingWebpayPlusNormal();
                 //configuration.Environment = "INTEGRACION";
                 //configuration.CommerceCode = "597020000540";
                 //configuration.PrivateCertPfxPath = @"C:/Path/to/private/Cert.pfx";
                 //configuration.Password = "PfxPassword";
 
-                var transaction = new Webpay(configuration).NormalTransaction;
-                var initResult = transaction.initTransaction(amount, buyOrder, sessionId, returnUrl, finalUrl);
+                transaction = new Webpay(configuration);
+                var normalTransaction = transaction.NormalTransaction;
+                var initResult = normalTransaction.initTransaction(ammount, buyOrder, sessionId, returnUrl, finalUrl);
                 
                 formAction = initResult.url;    //La redirección a esta url debe ser vía POST
                 tokens = initResult.token;                
-                //    RegistrarTransaccion();
+                //await RegistrarTransaccion(transaction, tokens, amount, configuration.CommerceCode);
             }
             catch(Exception ex)
             {
@@ -73,8 +80,9 @@ namespace tiendaAPI_MVC.Controllers
         }
 
         //URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 256
-        public async Task<ActionResult> ReturnUrl()
+        public async Task<ActionResult> ReturnUrl(string token_ws)
         {
+            await RegistrarTransaccion(transaction, token_ws, ammount, configuration.CommerceCode);
             Session["USUARIO"] = usuario;
             Session["carrito"] = carrito;
             Session["shipping"] = gastosEnvio;
@@ -90,10 +98,39 @@ namespace tiendaAPI_MVC.Controllers
             return View();
         }
 
-        public Boolean RegistrarTransaccion()
+        public async Task<Boolean> RegistrarTransaccion(Webpay transaction, string token, decimal total, string commerceCode)
         {
             Boolean resp = false;
+            try
+            {   
+                var transactionResult = transaction.NormalTransaction.getTransactionResult(token);
+                Transaction ts = new Transaction();
+                ts.AccountingDate = DateTime.Today.Millisecond;
+                ts.BuyOrder = transactionResult.buyOrder;
+                ts.CardNumber = transactionResult.cardDetail.cardNumber;
+                ts.CardExpirationDate = transactionResult.cardDetail.cardExpirationDate;
+                ts.AuthorizationCode = 0;
+                ts.PaymentTypeCode = null;
+                ts.ResponseCode = 0;
+                ts.SharedNumber = 0;
+                ts.Ammount = total;
+                ts.CommerceCode = commerceCode;
+                ts.TransactionDate = transactionResult.transactionDate.ToString();
+                ts.VCI = transactionResult.VCI;
+                ts.Token = token;
+                ts.Created_at = DateTime.Today;
+                ts.Updated_at = DateTime.Today;
+                
+                HttpClient hc = new HttpClient();
+                //var jsonContent = JsonConvert.SerializeObject(ts);
+                //HttpContent content = new StringContent(jsonContent, UnicodeEncoding.UTF8, "application/json");
+                HttpResponseMessage response = await hc.PostAsJsonAsync(this.endPoint + "Transactions", ts);
+                resp = response.IsSuccessStatusCode;
 
+            }catch(Exception ex)
+            {
+                resp = false;
+            }
             return resp;
         }
 

@@ -19,7 +19,7 @@ namespace tiendaAPI_MVC.Controllers
             {
                 HttpClient client = new HttpClient();
                 var json = await client.GetStringAsync("http://localhost:1612/api/LatsWebPayTransaction");
-                WebPayTransaction transaccion = JsonConvert.DeserializeObject<WebPayTransaction>(json);
+                Transaction transaccion = JsonConvert.DeserializeObject<Transaction>(json);
                 if (transaccion != null)
                     numDocumento = long.Parse(transaccion.IdOrden.ToString()) + 1;
 

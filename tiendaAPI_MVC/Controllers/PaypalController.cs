@@ -26,6 +26,7 @@ namespace tiendaAPI_MVC.Controllers
 {
     public class PaypalController : Controller
     {
+        private string endPoint = "http://localhost:1612/api/";
         private PayPal.Api.Payment payment;
         private decimal gastosEnvio = 1;
 
@@ -83,7 +84,7 @@ namespace tiendaAPI_MVC.Controllers
             amnt.details = details;
 
             // Now make a transaction object and assign the Amount object
-            Transaction tran = new Transaction();
+            PayPal.Api.Transaction tran = new PayPal.Api.Transaction();
             tran.amount = amnt;
             tran.description = "Description about the payment amount.";
             tran.item_list = itemList;
@@ -92,7 +93,7 @@ namespace tiendaAPI_MVC.Controllers
             // Now, we have to make a list of transaction and add the transactions object
             // to this list. You can create one or more object as per your requirements
 
-            List<Transaction> transactions = new List<Transaction>();
+            List<PayPal.Api.Transaction> transactions = new List<PayPal.Api.Transaction>();
             transactions.Add(tran);
 
             // Now we need to specify the FundingInstrument of the Payer
@@ -323,9 +324,9 @@ namespace tiendaAPI_MVC.Controllers
                 details = details
             };
 
-            var transactionList = new List<Transaction>();
+            var transactionList = new List<PayPal.Api.Transaction>();
 
-            transactionList.Add(new Transaction()
+            transactionList.Add(new PayPal.Api.Transaction()
             {
                 description = "Venta de productos tienda C#.",
                 invoice_number = new Random().Next(100000, 999999999).ToString(),   //Número de orden de compra
@@ -372,12 +373,12 @@ namespace tiendaAPI_MVC.Controllers
             try
             {
                 HttpClient client = new HttpClient();
-                var json = await client.GetStringAsync("http://localhost:1612/api/LatsWebPayTransaction");
+                var json = await client.GetStringAsync(this.endPoint + "PayTransaction");
                 WebPayTransaction transaccion = JsonConvert.DeserializeObject<WebPayTransaction>(json);
                 if(transaccion != null)
                     numDocumento = long.Parse(transaccion.IdOrden.ToString()) + 1;
 
-                //HttpResponseMessage response = await client.GetAsync("http://localhost:1612/api/LatsWebPayTransaction");
+                //HttpResponseMessage response = await client.GetAsync(this.endPoint + "LatsWebPayTransaction");
                 if (response.IsSuccessStatusCode)
                 //{
                 //    WebPayTransaction wpt = JsonConvert.DeserializeObject<WebPayTransaction>(response.ToString());
@@ -399,7 +400,7 @@ namespace tiendaAPI_MVC.Controllers
             Boolean resp = false;
             try
             {
-                WebPayTransaction wpt = new WebPayTransaction();
+                api_tienda.Models.Transaction wpt = new api_tienda.Models.Transaction();
                 wpt.IdOrden = long.Parse(payment.transactions[0].invoice_number);
                 wpt.Orden = null;
                 wpt.AccountingDate = DateTime.Now.Millisecond;
@@ -423,7 +424,7 @@ namespace tiendaAPI_MVC.Controllers
                 var stringContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
 
                 HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.PostAsync("http://localhost:1612/api/WebPayTransactions", stringContent); //Consultando los indicadores económicos
+                HttpResponseMessage response = await client.PostAsync(this.endPoint + "Transactions", stringContent); //Consultando los indicadores económicos
                 resp = response.IsSuccessStatusCode;
             }
             catch (Exception ex)

@@ -211,14 +211,14 @@
     <Compile Include="..\api_tienda\Models\TallasProducto.cs">
       <Link>Models\TallasProducto.cs</Link>
     </Compile>
+    <Compile Include="..\api_tienda\Models\Transaction.cs">
+      <Link>Models\Transaction.cs</Link>
+    </Compile>
     <Compile Include="..\api_tienda\Models\Usuario.cs">
       <Link>Models\Usuario.cs</Link>
     </Compile>
     <Compile Include="..\api_tienda\Models\WebPayError.cs">
       <Link>Models\WebPayError.cs</Link>
-    </Compile>
-    <Compile Include="..\api_tienda\Models\WebPayTransaction.cs">
-      <Link>Models\WebPayTransaction.cs</Link>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -578,6 +578,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Producto\" />
+    <Folder Include="Views\Transaction\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
