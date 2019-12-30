@@ -1,0 +1,134 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Styles.Render("~/Scripts/Admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css")
+@Styles.Render("~/Scripts/Admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css")
+@Styles.Render("~/Scripts/Admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css")
+@Styles.Render("~/Scripts/Admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css")
+@Styles.Render("~/Scripts/Admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css")
+@Styles.Render("~/Content/css/shared.css")
+@Styles.Render("~/Content/css/mantenedores/mantenedores.css")
+
+<div class="right_col" role="main">
+    <div id="div-form">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Paises</h3>
+            </div>
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title" z>
+                        <h2>Mantenedor de <small>Paises</small></h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form id="demo-form2" name="Pais" data-parsley-validate class="form-horizontal form-label-left">
+                            <input type="hidden" id="Id" name="Id" value="">
+                            <input type="hidden" id="Created_at" name="Created_at" value="">
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Nombre <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="Nombre" name="Nombre" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button type="button" id="btnGrabar" class="btn btn-success">Grabar</button>
+                                    <button type="button" id="btnEliminar" class="btn btn-danger">Eliminar</button>
+                                    <button type="button" id="btnCancelar" class="btn btn-primary">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div-grid">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Paises</h3>
+            </div>
+            <div class="title_right">
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Mantenedor de <small>Paises</small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" id="btnNuevo" class="btn btn-primary">Nuevo</button>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="filtro" name="filtro" class="form-control col-md-12" placeholder="Escribe aquí el texto a buscar"/>
+                        </div>
+                    </div>
+                    <div class="x_content">
+
+                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th class="col-small">Fecha creación</th>
+                                    <th class="col-small">Última actualización</th>
+                                    <th class="col-small">Fecha eliminación</th>
+                                    <th class="col-acciones">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbPaises"></tbody>
+                        </table>
+
+                        <nav aria-label="Page navigation example">
+                            <ul id="paginacion" class="pagination">
+                            </ul>
+                        </nav>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/Admin/vendors/jquery/dist/jquery.min.js")
+
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net/js/jquery.dataTables.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-buttons/js/buttons.flash.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-buttons/js/buttons.html5.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-buttons/js/buttons.print.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/jszip/dist/jszip.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/pdfmake/build/pdfmake.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/pdfmake/build/vfs_fonts.js")
+@Scripts.Render("~/Scripts/js/mantenedores/shared.js")
+@Scripts.Render("~/Scripts/js/mantenedores/paises.js")

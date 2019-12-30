@@ -1,0 +1,20 @@
+﻿#div-form{
+    display: none;
+}
+
+.col-small{
+    width: 10%;
+}
+
+.col-medium {
+    width: 25%;
+}
+
+.col-width {
+    width: 50%;
+}
+
+.col-acciones {
+    width: 100px !important;
+    padding: 0px 10px !important;
+}

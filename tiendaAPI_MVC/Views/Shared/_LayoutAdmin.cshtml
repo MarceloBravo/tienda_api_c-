@@ -3,7 +3,7 @@
     Usuario usuario = (Usuario)Session["USUARIO"];
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-cl">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -329,8 +329,10 @@
     <!-- bootstrap-daterangepicker -->
     @Scripts.Render("~/Scripts/Admin/vendors/moment/min/moment.min.js")
     @Scripts.Render("~/Scripts/Admin/vendors/bootstrap-daterangepicker/daterangepicker.js")
+
+    @RenderSection("scripts", required: false)
+
     <!-- Custom Theme Scripts -->
     @Scripts.Render("~/Content/build/js/custom.min.js")
-
 </body>
 </html>

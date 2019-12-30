@@ -83,7 +83,7 @@ namespace tiendaAPI_MVC.Controllers
             amnt.details = details;
 
             // Now make a transaction object and assign the Amount object
-            Transaction tran = new Transaction();
+            PayPal.Api.Transaction tran = new PayPal.Api.Transaction();
             tran.amount = amnt;
             tran.description = "Description about the payment amount.";
             tran.item_list = itemList;
@@ -92,7 +92,7 @@ namespace tiendaAPI_MVC.Controllers
             // Now, we have to make a list of transaction and add the transactions object
             // to this list. You can create one or more object as per your requirements
 
-            List<Transaction> transactions = new List<Transaction>();
+            List<PayPal.Api.Transaction> transactions = new List<PayPal.Api.Transaction>();
             transactions.Add(tran);
 
             // Now we need to specify the FundingInstrument of the Payer
@@ -323,9 +323,9 @@ namespace tiendaAPI_MVC.Controllers
                 details = details
             };
 
-            var transactionList = new List<Transaction>();
+            var transactionList = new List<PayPal.Api.Transaction>();
 
-            transactionList.Add(new Transaction()
+            transactionList.Add(new PayPal.Api.Transaction()
             {
                 description = "Venta de productos tienda C#.",
                 invoice_number = new Random().Next(100000, 999999999).ToString(),   //Número de orden de compra
@@ -399,7 +399,7 @@ namespace tiendaAPI_MVC.Controllers
             Boolean resp = false;
             try
             {
-                WebPayTransaction wpt = new WebPayTransaction();
+                api_tienda.Models.Transaction wpt = new api_tienda.Models.Transaction();
                 wpt.IdOrden = long.Parse(payment.transactions[0].invoice_number);
                 wpt.Orden = null;
                 wpt.AccountingDate = DateTime.Now.Millisecond;

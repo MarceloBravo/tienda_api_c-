@@ -1,0 +1,13 @@
+﻿.dataTables_length,
+.dataTables_filter,
+.dataTables_info,
+.dataTables_paginate {
+    display: none !important;
+}
+
+a:disabled
+a[disabled]
+{
+    background-color: #cccccc;
+    color: #666666;
+}

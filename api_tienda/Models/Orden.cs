@@ -33,7 +33,7 @@ namespace api_tienda.Models
 
         public ICollection<WebPayError> WebPayErrors { set; get; }
 
-        public ICollection<WebPayTransaction> WebPayTransactions { set; get; }
+        public ICollection<Transaction> WebPayTransactions { set; get; }
      
         public Orden()
         {

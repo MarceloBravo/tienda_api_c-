@@ -195,6 +195,9 @@
     <Compile Include="..\api_tienda\Models\Orden.cs">
       <Link>Models\Orden.cs</Link>
     </Compile>
+    <Compile Include="..\api_tienda\Models\Paginacion.cs">
+      <Link>Models\Paginacion.cs</Link>
+    </Compile>
     <Compile Include="..\api_tienda\Models\Pais.cs">
       <Link>Models\Pais.cs</Link>
     </Compile>
@@ -213,20 +216,21 @@
     <Compile Include="..\api_tienda\Models\TallasProducto.cs">
       <Link>Models\TallasProducto.cs</Link>
     </Compile>
+    <Compile Include="..\api_tienda\Models\Transaction.cs">
+      <Link>Models\Transaction.cs</Link>
+    </Compile>
     <Compile Include="..\api_tienda\Models\Usuario.cs">
       <Link>Models\Usuario.cs</Link>
     </Compile>
     <Compile Include="..\api_tienda\Models\WebPayError.cs">
       <Link>Models\WebPayError.cs</Link>
     </Compile>
-    <Compile Include="..\api_tienda\Models\WebPayTransaction.cs">
-      <Link>Models\WebPayTransaction.cs</Link>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Admin\HomeAdminController.cs" />
+    <Compile Include="Controllers\Admin\PaisController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -249,6 +253,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\build\css\custom.css" />
     <Content Include="Content\build\css\custom.min.css" />
+    <Content Include="Content\css\mantenedores\mantenedores.css" />
+    <Content Include="Content\css\shared.css" />
     <Content Include="Content\img-admin\back_disabled.png" />
     <Content Include="Content\img-admin\back_enabled.png" />
     <Content Include="Content\img-admin\back_enabled_hover.png" />
@@ -4798,6 +4804,8 @@
     <Content Include="Scripts\js\jquery.nice-select.min.js" />
     <Content Include="Scripts\js\jquery.sticky.js" />
     <Content Include="Scripts\js\main.js" />
+    <Content Include="Scripts\js\mantenedores\paises.js" />
+    <Content Include="Scripts\js\mantenedores\shared.js" />
     <Content Include="Scripts\js\nouislider.min.js" />
     <Content Include="Scripts\js\owl.carousel.min.js" />
     <Content Include="Scripts\js\parallax.min.js" />
@@ -4837,6 +4845,7 @@
     <Content Include="Views\WebPay\ReturnUrl.cshtml" />
     <Content Include="Views\HomeAdmin\Home.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Pais\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
