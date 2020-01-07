@@ -1,0 +1,124 @@
+﻿@using api_tienda.Models
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{ 
+    var data = (Region)ViewBag.region;
+}
+
+
+<!-- bootstrap-wysiwyg -->
+@Styles.Render("~/Scripts/Admin/vendors/google-code-prettify/bin/prettify.min.css")
+<!-- Select2 -->
+@Styles.Render("~/Scripts/Admin/vendors/select2/dist/css/select2.min.css")
+<!-- Switchery -->
+@Styles.Render("~/Scripts/Admin/vendors/switchery/dist/switchery.min.css")
+<!-- starrr -->
+@Styles.Render("~/Scripts/Admin/vendors/starrr/dist/starrr.css")
+<!-- bootstrap-daterangepicker -->
+@Styles.Render("~/Scripts/Admin/vendors/bootstrap-daterangepicker/daterangepicker.css")
+<!-- Custom Theme Style -->
+@Styles.Render("~/Content/build/css/custom.min.css")
+
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Mantenedores</h3>
+            </div>
+            <div class="title_right">
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Mantenedor <small>Regiones</small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            <input type="hidden" id="Id" name="Id" value="@data.Id"/>
+                            <input type="hidden" id="Created_at" name="Created_at" value="@data.Created_at"/>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Nombre <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="nombre" name="nombre" required="required" class="form-control col-md-7 col-xs-12" value="@data.Nombre">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                    Pais <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    
+                                    <!-- 
+                                        Obs. El HtlmDropDownList recibe un Objeto SelectListItem enviado desde el controlador a traves del 
+                                        ViewBag paises, por lo tando para poder preseleccionar un item de la lista se debe colocar un valor 
+                                        NULL como segundo parametro, de lo contrario la lista se llenará pero el item no se seleccionará.
+                                        La siguiente línea de código llena la lista pero no selecciona un elemento 
+
+                                        Html.DropDownList("paises", new SelectList(ViewBag.paises, "Value", "Text"), "-- Seleccione --", new { @@class = "form-control" }) 
+
+                                    -->
+                                    @Html.DropDownList("paises", null, "-- Seleccione --", new { Name = "IdPais", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button type="button" id="btnGrabar" class="btn btn-success">Grabar</button>
+                                    @{
+                                        var disabled = data.Id == 0 ? "disabled='disabled'" : "";
+                                        <button type="button" id="btnEliminar" class="btn btn-danger" @disabled>Eliminar</button>
+                                    }
+
+                                    <button type="button" id="btnCancelar" class="btn btn-primary">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- bootstrap-progressbar -->
+@Scripts.Render("~/Scripts/Admin/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js")
+<!-- iCheck -->
+@Scripts.Render("~/Scripts/Admin/vendors/iCheck/icheck.min.js")
+<!-- bootstrap-daterangepicker -->
+@Scripts.Render("~/Scripts/Admin/vendors/moment/min/moment.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/bootstrap-daterangepicker/daterangepicker.js")
+<!-- bootstrap-wysiwyg -->
+@Scripts.Render("~/Scripts/Admin/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/jquery.hotkeys/jquery.hotkeys.js")
+@Scripts.Render("~/Scripts/Admin/vendors/google-code-prettify/src/prettify.js")
+<!-- jQuery Tags Input -->
+@Scripts.Render("~/Scripts/Admin/vendors/jquery.tagsinput/src/jquery.tagsinput.js")
+<!-- Switchery -->
+@Scripts.Render("~/Scripts/Admin/vendors/switchery/dist/switchery.min.js")
+<!-- Select2 -->
+@Scripts.Render("~/Scripts/Admin/vendors/select2/dist/js/select2.full.min.js")
+<!-- Parsley -->
+@Scripts.Render("~/Scripts/Admin/vendors/parsleyjs/dist/parsley.min.js")
+<!-- Autosize -->
+@Scripts.Render("~/Scripts/Admin/vendors/autosize/dist/autosize.min.js")
+<!-- jQuery autocomplete -->
+@Scripts.Render("~/Scripts/Admin/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js")
+<!-- starrr -->
+@Scripts.Render("~/Scripts/Admin/vendors/starrr/dist/starrr.js")
+<!-- Custom Theme Scripts -->
+@Scripts.Render("~/Content/build/js/custom.min.js")
+
+@Scripts.Render("~/Scripts/js/mantenedores/regiones/form.js")

@@ -190,6 +190,7 @@
     <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\RegionesController.cs" />
     <Compile Include="Controllers\WebPayTransactionsController.cs" />
     <Compile Include="DAL\TiendaContext.cs" />
     <Compile Include="DAL\TiendaInitializer.cs" />

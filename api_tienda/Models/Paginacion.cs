@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace api_tienda.Models
 {
+    //[DataContract(IsReference = true)]
     public class Paginacion<T> where T: class
     {
         public int pagina { set; get; } = 1;

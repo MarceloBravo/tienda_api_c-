@@ -33,16 +33,16 @@ namespace tiendaAPI_MVC.Controllers.Admin
         /// Retorna el listado de paises en formato Json
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> GetPaises(int pagina = 1)
+        public async Task<ActionResult> Listar(int pagina)
         {
             //Validación de permisos de usuario
-            //if (Session["USUARIO"] == null)
-            //    return Redirect("/Login");
+            if (Session["USUARIO"] == null)
+                return Redirect("/Login");
 
             try
             {
                 HttpClient hc = new HttpClient();
-                string json = await hc.GetStringAsync(endPoint + "Pais");
+                string json = await hc.GetStringAsync(endPoint + "Pais?pagina=" + pagina);
                 Paginacion<Pais> paises = JsonConvert.DeserializeObject<Paginacion<Pais>>(json);
                 if (paises == null)
                 {
@@ -67,6 +67,9 @@ namespace tiendaAPI_MVC.Controllers.Admin
         [HttpGet]
         public async Task<ActionResult> Show(int id)
         {
+            //Validación de permisos de usuario
+            if (Session["USUARIO"] == null)
+                return Redirect("/Login");
             try
             {
                 HttpClient cli = new HttpClient();
@@ -89,6 +92,10 @@ namespace tiendaAPI_MVC.Controllers.Admin
         [HttpPost]
         public async Task<ActionResult> Create([System.Web.Http.FromBody] Pais pais)
         {
+            //Validación de permisos de usuario
+            if (Session["USUARIO"] == null)
+                return Redirect("/Login");
+
             try
             {
                 var json = JsonConvert.SerializeObject(pais);
@@ -109,6 +116,10 @@ namespace tiendaAPI_MVC.Controllers.Admin
         [HttpPut]
         public async Task<ActionResult> Update(int id, [System.Web.Http.FromBody] Pais pais)
         {
+            //Validación de permisos de usuario
+            if (Session["USUARIO"] == null)
+                return Redirect("/Login");
+
             try
             {                
                 var json = JsonConvert.SerializeObject(pais);
@@ -130,7 +141,10 @@ namespace tiendaAPI_MVC.Controllers.Admin
         [HttpDelete]
         public async Task<ActionResult> Delete(int id)
         {
-            string message = "";
+            //Validación de permisos de usuario
+            if (Session["USUARIO"] == null)
+                return Redirect("/Login");
+            
             try
             {
                 HttpClient client = new HttpClient();
@@ -157,6 +171,10 @@ namespace tiendaAPI_MVC.Controllers.Admin
         [Route("pais/filtrar/{filtro}")]
         public async Task<ActionResult> filtrar(string filtro, int pagina = 1)
         {
+            //Validación de permisos de usuario
+            if (Session["USUARIO"] == null)
+                return Redirect("/Login");
+
             try
             {
                 HttpClient cli = new HttpClient();

@@ -1,0 +1,109 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Bootstrap -->
+@Styles.Render("~/Scripts/Admin/vendors/bootstrap/dist/css/bootstrap.min.css")
+<!-- Font Awesome -->
+@Styles.Render("~/Scripts/Admin/vendors/font-awesome/css/font-awesome.min.css")
+<!-- NProgress -->
+@Styles.Render("~/Scripts/Admin/vendors/nprogress/nprogress.css")
+<!-- iCheck -->
+@Styles.Render("~/Scripts/Admin/vendors/iCheck/skins/flat/green.css")
+<!-- Datatables -->
+@Styles.Render("~/Scripts/Admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css")
+@Styles.Render("~/Scripts/Admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css")
+@Styles.Render("~/Scripts/Admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css")
+@Styles.Render("~/Scripts/Admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css")
+@Styles.Render("~/Scripts/Admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css")
+<!-- Custom Theme Style -->
+@Styles.Render("~/Content/build/css/custom.min.css")
+
+@Styles.Render("~/Content/css/shared.css")
+
+<div class="right_col" role="main">
+    <div id="div-grid">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Regiones</h3>
+            </div>
+            <div class="title_right">
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Mantenedor de <small>Regiones</small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" id="btnNuevo" class="btn btn-primary">Nuevo</button>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="filtro" name="filtro" class="form-control col-md-12" placeholder="Escribe aquí el texto a buscar" />
+                        </div>
+                    </div>
+                    <div class="x_content">
+
+                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Pais</th>
+                                    <th class="col-small">Fecha creación</th>
+                                    <th class="col-small">Última actualización</th>
+                                    <th class="col-small">Fecha eliminación</th>
+                                    <th class="col-acciones">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbRegistros"></tbody>
+                        </table>
+
+                        <nav aria-label="Page navigation example">
+                            <ul id="paginacion" class="pagination"></ul>
+                        </nav>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+@Scripts.Render("~/Scripts/Admin/vendors/jquery/dist/jquery.min.js")
+<!-- Bootstrap -->
+@Scripts.Render("~/Scripts/Admin/vendors/bootstrap/dist/js/bootstrap.min.js")
+<!-- FastClick -->
+@Scripts.Render("~/Scripts/Admin/vendors/fastclick/lib/fastclick.js")
+<!-- NProgress -->
+@Scripts.Render("~/Scripts/Admin/vendors/nprogress/nprogress.js")
+<!-- iCheck -->
+@Scripts.Render("~/Scripts/Admin/vendors/iCheck/icheck.min.js")
+<!-- Datatables -->
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net/js/jquery.dataTables.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-buttons/js/buttons.flash.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-buttons/js/buttons.html5.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-buttons/js/buttons.print.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js")
+@Scripts.Render("~/Scripts/Admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/jszip/dist/jszip.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/pdfmake/build/pdfmake.min.js")
+@Scripts.Render("~/Scripts/Admin/vendors/pdfmake/build/vfs_fonts.js")
+<!-- Custom Theme Scripts -->
+@Scripts.Render("~/Scripts/js/mantenedores/shared.js")
+
+@Scripts.Render("~/Content/build/js/custom.min.js")
+
+@Scripts.Render("~/Scripts/js/mantenedores/regiones/grid.js")

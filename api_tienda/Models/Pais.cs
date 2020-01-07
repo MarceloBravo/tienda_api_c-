@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,6 +19,7 @@ namespace api_tienda.Models
         public DateTime Updated_at { set; get; }
         public DateTime? Deleted_at { set; get; }
 
+        [JsonIgnore]    //Evita el error por referencia circular entre la clase Region y la clase Pais al momento de desserializar el objeto en un Json
         public ICollection<Region> Regiones { set; get; }
 
         public Pais()

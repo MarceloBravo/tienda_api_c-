@@ -81,6 +81,7 @@
     <Reference Include="System.Net.WebSockets.Client, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.WebSockets.Client.4.3.2\lib\net46\System.Net.WebSockets.Client.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
@@ -231,6 +232,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Admin\HomeAdminController.cs" />
     <Compile Include="Controllers\Admin\PaisController.cs" />
+    <Compile Include="Controllers\Admin\RegionesController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -4805,6 +4807,8 @@
     <Content Include="Scripts\js\jquery.sticky.js" />
     <Content Include="Scripts\js\main.js" />
     <Content Include="Scripts\js\mantenedores\paises.js" />
+    <Content Include="Scripts\js\mantenedores\regiones\form.js" />
+    <Content Include="Scripts\js\mantenedores\regiones\grid.js" />
     <Content Include="Scripts\js\mantenedores\shared.js" />
     <Content Include="Scripts\js\nouislider.min.js" />
     <Content Include="Scripts\js\owl.carousel.min.js" />
@@ -4846,6 +4850,8 @@
     <Content Include="Views\HomeAdmin\Home.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Pais\Index.cshtml" />
+    <Content Include="Views\Regiones\Index.cshtml" />
+    <Content Include="Views\Regiones\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

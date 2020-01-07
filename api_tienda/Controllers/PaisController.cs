@@ -36,6 +36,12 @@ namespace api_tienda.Controllers
             //return db.Paises;
         }
 
+        [Route("api/PaisList")]
+        public IHttpActionResult GetListPaises()
+        {
+            return Json(db.Paises.ToList());
+        }
+
 
         // GET: api/Pais/5
         [ResponseType(typeof(Pais))]

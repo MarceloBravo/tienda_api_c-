@@ -20,7 +20,7 @@ var grilla = {
     cargar: function (pagina) {
         if (pagina == undefined) { pagina = 1 }
 
-        fetch(endPoint + 'Pais/getPaises?pagina=' + pagina)
+        fetch(endPoint + 'Pais/listar?pagina=' + pagina)
             .then(res => res.json())
             .then(function (data) {
                 paises = JSON.parse(data);
@@ -39,7 +39,7 @@ var grilla = {
 
                 document.getElementById('tbPaises').innerHTML = lstPaises.join("");
 
-                grilla.paginacion(paises.pagina, paises.totalPaginas, paises.pagVisibles, paises.totalRegistros);
+                paginacion.paginar(paises.pagina, paises.totalPaginas, paises.pagVisibles, paises.totalRegistros);
             })
             .catch(function (error) {
                 document.getElementById('tbPaises').innerHTML = `<tr>
@@ -57,11 +57,11 @@ var grilla = {
         if (filtro == "") {
             grilla.cargar();
         } else {
-            aplicarFiltro(filtro);
+            aplicarFiltro(filtro, pagina);
         }
 
-        function aplicarFiltro(filtro) {
-            fetch(endPoint + "Pais/filtrar?filtro=" + filtro)
+        function aplicarFiltro(filtro, pagina) {           
+            fetch(endPoint + "Pais/filtrar?filtro=" + filtro + "&pagina=" + pagina)
                 .then(res => res.json())
                 .then(data => {
 
@@ -85,7 +85,7 @@ var grilla = {
                         result = `<tr><td colspan="5">${data}</td></tr>`;
                     }
                     document.getElementById('tbPaises').innerHTML = result;
-                    grilla.paginacion(data.pagina, data.totalPaginas, data.pagVisibles, data.totalRegistros);
+                    paginacion.paginar(data.pagina, data.totalPaginas, data.pagVisibles, data.totalRegistros);
                 })
                 .catch(error => {
                     console.log(error)
@@ -97,6 +97,7 @@ var grilla = {
         }
     },
 
+    /*
     paginacion: function (pagActual, totPaginas, pagVisibles, totRegistros) {
         var paginacion = document.getElementById('paginacion');
         var filtro = document.getElementById('filtro').value;
@@ -133,6 +134,7 @@ var grilla = {
             return res >= totPag ? totPag : res;
         }
     }
+    */
 };
 
 
